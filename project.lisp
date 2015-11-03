@@ -12,3 +12,7 @@
 (defun tabuleiro-preenchido-p (tabuleiro l c)
   (aref tabuleiro l c)
   )
+
+;////////////////////////////////////////////////////////////// estado ///////////////////////////////////
+
+(cl-defstruct estado pontos pecas-por-colocar pecas-colocadas tabuleiro)
