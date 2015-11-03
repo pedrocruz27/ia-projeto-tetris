@@ -15,4 +15,4 @@
 
 ;////////////////////////////////////////////////////////////// estado ///////////////////////////////////
 
-(cl-defstruct estado pontos pecas-por-colocar pecas-colocadas tabuleiro)
+(defstruct estado pontos pecas-por-colocar pecas-colocadas tabuleiro)
