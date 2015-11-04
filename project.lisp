@@ -25,27 +25,29 @@
   )
 
 (defun tabuleiro-preenchido-p (tabuleiro l c)
-  (aref tabuleiro l-1 c-1)
+  (aref tabuleiro (1- l) (1- c))
   )
 
 (defun tabuleiro-altura-coluna (tabuleiro c)
-  (setf resultado 0)
-  (setf l (1- (first (array-dimensions tabuleiro))))
-  (dotimes (i l resultado) 
-    (if (tabuleiro-preenchido-p tabuleiro l c)
-        (+1 l)
+  (let ((l (1- (first (array-dimensions tabuleiro))))
+        (resultado 0))
+    (dotimes (i l resultado) 
+      (if (tabuleiro-preenchido-p tabuleiro l c)
+          (incf RESULTADO)
+        )
       )
     )
   )
+  
 
 (defun tabuleiro-linha-completa-p (tabuleiro l)
-  (if (< l-1 0) 
-      (cond ((tabuleiro-preenchido-p (tabuleiro l c)))
-            
-            
-            
+  (let ((c (1- (cadr (array-dimensions tabuleiro)))))
+    (dotimes (i c) 
+      (cond ((not(tabuleiro-preenchido-p tabuleiro l c)) (return-from tabuleiro-linha-completa-p nil)))
       )
     )
+  t
+  )
 
 ;;;;////////////////////////////////////////////////////////////// estado ///////////////////////////////////
 
