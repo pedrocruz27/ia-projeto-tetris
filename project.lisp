@@ -45,34 +45,36 @@
 ;;;e um inteiro <c> que equivale ao numero da coluna e devolve o valor logico verdade
 ;;;se essa posicao estiver preenchida, falso caso contrario 
 (defun tabuleiro-preenchido-p (tabuleiro l c)
-  (aref tabuleiro l-1 c-1)
+  (aref tabuleiro (1- l) (1- c))
   )
 
 ;;;TABULEIRO-ALTURA-COLUNA
 ;;;seletor recebe um <tabuleiro>, um inteiro <c> ao numero de uma coluna e devolve
 ;;;a altura da coluna de uma coluna.
 (defun tabuleiro-altura-coluna (tabuleiro c)
-  (setf resultado 0)
-  (setf l (1- (first (array-dimensions tabuleiro))))
-  (dotimes (i l resultado) 
-    (if (tabuleiro-preenchido-p tabuleiro l c)
-        (+1 l)
+  (let ((l (1- (first (array-dimensions tabuleiro))))
+        (resultado 0))
+    (dotimes (i l resultado) 
+      (if (tabuleiro-preenchido-p tabuleiro l c)
+          (incf RESULTADO)
+        )
       )
     )
   )
+  
 
 ;;;TABULEIRO-LINHA-COMPLETA-P
 ;;;reconhecedor recebe um <tabuleiro>, um inteiro que equivale ao numero de uma
 ;;;linha <l> e devolve o valor logico verdade se todas as posicoes da linha 
 ;;;recebida estiverem preenchidas, e falso caso contrario 
 (defun tabuleiro-linha-completa-p (tabuleiro l)
-  (if (< l-1 0) 
-      (cond ((tabuleiro-preenchido-p (tabuleiro l c)))
-            
-            
-            
+  (let ((c (1- (cadr (array-dimensions tabuleiro)))))
+    (dotimes (i c) 
+      (cond ((not(tabuleiro-preenchido-p tabuleiro l c)) (return-from tabuleiro-linha-completa-p nil)))
       )
     )
+  t
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
