@@ -26,15 +26,15 @@
 
 (defun cria-tabuleiro ()
   (make-array '(18 10))
-  )
+)
 
 (defun copia-tabuleiro (array)
   (setf tabuleiro array) tabuleiro
-  )
+)
 
 (defun tabuleiro-preenchido-p (tabuleiro l c)
   (aref tabuleiro (1- l) (1- c))
-  )
+)
 
 (defun tabuleiro-altura-coluna (tabuleiro c)
   (let ((l (1- (first (array-dimensions tabuleiro))))
@@ -45,7 +45,7 @@
         )
       )
     )
-  )
+)
   
 
 (defun tabuleiro-linha-completa-p (tabuleiro l)
@@ -55,7 +55,31 @@
       )
     )
   t
-  )
+)
+
+(defun tabuleiro-preenche! (tabuleiro l c)
+  (setf (aref tabuleiro (1- l) (1- c)) T)
+)
+
+(defun tabuleiro-remove-linha! (tabuleiro l)
+  
+)
+
+(defun tabuleiro-todo-preenchido-p (tabuleiro)
+  
+)
+
+(defun tabuleiros-iguais-p (t1 t2)
+  
+)
+
+(defun tabuleiro->array (tabuleiro)
+  
+)
+
+(defun array->tabuleiro (array)
+  
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -66,11 +90,17 @@
 
 (defstruct estado pontos pecas-por-colocar pecas-colocadas tabuleiro)
 
-(defun copia-estado (estado))
+(defun copia-estado (estado)
+  
+)
 
-(defun estados-iguais-p (estado1 estado2))
+(defun estados-iguais-p (estado1 estado2)
+  
+)
 
-(defun estado-final-p (estado))
+(defun estado-final-p (estado)
+  
+)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -81,12 +111,22 @@
 
 (defstruct problema estado-inicial solucao accoes resultado custo-caminho)
 
-(defun solucao (estado))
+(defun solucao (estado)
+  
+)
 
-(defun accoes (estado))
+(defun accoes (estado)
+  
+)
 
-(defun resultado (estado accao))
+(defun resultado (estado accao)
+  
+)
 
-(defun qualidade (estado))
+(defun qualidade (estado)
+  
+)
 
-(defun custo-opurtunidade (estado))
+(defun custo-opurtunidade (estado)
+  
+)
