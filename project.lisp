@@ -1,4 +1,21 @@
 ;;;;////////////////////////////////////////// funcoes da lista////////////////////////////////////////
+
+;;;ACCOES
+
+(defun cria-accao (c peca)
+  list(c peca)
+)
+
+(defun accao-coluna (accao)
+  car(accao)
+)
+
+(defun accao-peca (accao)
+  cdr(accao)
+)
+
+;;;TABULEIRO
+
 (defun cria-tabuleiro ()
   (make-array '(18 10))
   )
