@@ -44,15 +44,16 @@
 ;;;construtor que recebe um <tabuleiro> e devolve um novo tabuleiro com o mesmo
 ;;;conteudo do tabuleiro recebido
 (defun copia-tabuleiro (tabuleiro)
-  (let ((newtabuleiro (cria-tabuleiro))
+  (let ((new-tabuleiro (cria-tabuleiro))
         (c (1- (cadr (array-dimensions tabuleiro))))
         (l (1- (first (array-dimensions tabuleiro))))
         )
     (dotimes (ic c) 
       (dotimes (il l)
-        (setf (aref newtabuleiro l i) (aref newtabuleiro l i))
+        (setf (aref new-tabuleiro il ic) (aref tabuleiro il ic))
         )
       )
+    new-tabuleiro
     )
 )
 
@@ -161,7 +162,13 @@
 ;;;COPIA-ESTADO
 ;;;construtor que recebe um <estado> e devolve um novo cujo conteudo deve ser
 ;;;copidado a partir do estado original
-(defun copia-estado (estado))
+(defun copia-estado (estado)
+  (make-estado :pontos (estado-pontos estado)
+               :pecas-por-colocar (estado-pecas-por-colocar estado)
+               :pecas-colocadas (estado-pecas-colocadas estado)
+               :tabuleiro (estado-tabuleiro estado)
+               )
+)
 
 ;;;ESTADOS-IGUAIS-P
 ;teste que recebe dois estados <estado1> e <estado2> , devolvendo o valor logico
@@ -175,7 +182,7 @@
 ;;;um estado final onde o jogador ja nao possa fazer mais jogadas e falso caso
 ;;;contrario
 (defun estado-final-p (estado)
-  (if (or (estado-pecas-por-colocar estado) (tabuleiro-topo-preenchido-p estado))
+  (if (or (not(car(estado-pecas-por-colocar estado))) (tabuleiro-topo-preenchido-p (estado-tabuleiro estado)))
       T
     NIL
     )
