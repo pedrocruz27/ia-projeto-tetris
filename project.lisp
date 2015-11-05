@@ -55,7 +55,7 @@
   (let ((l (1- (first (array-dimensions tabuleiro))))
         (resultado 0))
     (dotimes (i l resultado) 
-      (if (tabuleiro-preenchido-p tabuleiro l c)
+      (if (tabuleiro-preenchido-p tabuleiro (1+ i) c)
           (incf RESULTADO)
         )
       )
