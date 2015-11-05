@@ -44,7 +44,16 @@
 ;;;construtor que recebe um <tabuleiro> e devolve um novo tabuleiro com o mesmo
 ;;;conteudo do tabuleiro recebido
 (defun copia-tabuleiro (tabuleiro)
-  (copy-seq tabuleiro)
+  (let ((newtabuleiro (cria-tabuleiro))
+        (c (1- (cadr (array-dimensions tabuleiro))))
+        (l (1- (first (array-dimensions tabuleiro))))
+        )
+    (dotimes (ic c) 
+      (dotimes (il l)
+        (setf (aref newtabuleiro l i) (aref newtabuleiro l i))
+        )
+      )
+    )
 )
 
 ;;;TABULEIRO-PREENCHIDO-P
@@ -74,7 +83,7 @@
 ;;;linha <l> e devolve o valor logico verdade se todas as posicoes da linha 
 ;;;recebida estiverem preenchidas, e falso caso contrario 
 (defun tabuleiro-linha-completa-p (tabuleiro l)
-  (let ((c (1- (cadr (array-dimensions tabuleiro)))))
+  (let ()
     (dotimes (i c) 
       (cond ((not(tabuleiro-preenchido-p tabuleiro l (1+ i))) (return-from tabuleiro-linha-completa-p nil)))
       )
@@ -100,7 +109,7 @@
   (if (and (<= l (car (array-dimensions tabuleiro))) (> l 0))
       (let ((c (1- (cadr (array-dimensions tabuleiro)))))
         (dotimes (i c) 
-          (setf (aref tabuleiro (1- l) (i)) NIL)
+          (setf (aref tabuleiro (1- l) i) NIL)
           )
         )
     )
@@ -166,7 +175,7 @@
 ;;;um estado final onde o jogador ja nao possa fazer mais jogadas e falso caso
 ;;;contrario
 (defun estado-final-p (estado)
-  (if (or (estado-pecas-por-colocar-p nil) (tabuleiro-topo-preenchido-p estado))
+  (if (or (estado-pecas-por-colocar estado) (tabuleiro-topo-preenchido-p estado))
       T
     NIL
     )
