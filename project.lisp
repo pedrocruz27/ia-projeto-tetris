@@ -81,7 +81,11 @@
 )
 
 (defun tabuleiro-remove-linha! (tabuleiro l)
-  
+  (let ((c (1- (cadr (array-dimensions tabuleiro)))))
+    (dotimes (i c) 
+      (setf (aref tabuleiro (1- l) (i)) NIL)
+      )
+    )
 )
 
 (defun tabuleiro-todo-preenchido-p (tabuleiro)
