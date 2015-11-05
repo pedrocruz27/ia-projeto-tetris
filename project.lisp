@@ -7,16 +7,23 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;CRIA-ACCAO
+;;;construtor recebe um inteiro <c> correspondente a posicao da coluna mais a 
+;;;esquerda a partir da qual a peca vai ser colocada, e um array <peca> com a 
+;;;configuracao da peca a colocar, devolvendo uma nova accao
 (defun cria-accao (c peca)
  (cons c peca)
 )
 
 ;;;ACCAO-COLUNA
+;;;selector devolve um inteiro correspondente a coluna mais a esquerda a partir
+;;;da qual a peca vai ser colocada
 (defun accao-coluna (accao)
   (car accao)
 )
 
 ;;;ACCAO-PECA
+;;;seletor devolve o array com a configuracao geometrica exacta com que vai 
+;;;ser colocada
 (defun accao-peca (accao)
   (cdr accao)
 )
@@ -31,7 +38,7 @@
 ;;;construtor que nao recebe qualquer argumento e devolve um novo tabuleiro vazio 
 (defun cria-tabuleiro ()
   (make-array '(18 10))
-)
+  )
 
 ;;;COPIA-TABULEIRO
 ;;;construtor que recebe um <tabuleiro> e devolve um novo tabuleiro com o mesmo
@@ -46,21 +53,21 @@
 ;;;se essa posicao estiver preenchida, falso caso contrario 
 (defun tabuleiro-preenchido-p (tabuleiro l c)
   (aref tabuleiro (1- l) (1- c))
-)
+  )
 
 ;;;TABULEIRO-ALTURA-COLUNA
-;;;seletor recebe um <tabuleiro>, um inteiro <c> ao numero de uma coluna e devolve
-;;;a altura da coluna de uma coluna.
+;;;seletor recebe um <tabuleiro>, um inteiro <c> correspondete ao numero de uma coluna
+;;;e devolve a altura da coluna de uma coluna
 (defun tabuleiro-altura-coluna (tabuleiro c)
   (let ((l (1- (first (array-dimensions tabuleiro))))
         (resultado 0))
     (dotimes (i l resultado) 
-      (if (tabuleiro-preenchido-p tabuleiro (1+ i) c)
+      (if (tabuleiro-preenchido-p tabuleiro l c)
           (incf RESULTADO)
         )
       )
     )
-)
+  )
   
 
 ;;;TABULEIRO-LINHA-COMPLETA-P
@@ -122,9 +129,7 @@
 ;;;COPIA-ESTADO
 ;;;construtor que recebe um <estado> e devolve um novo cujo conteudo deve ser
 ;;;copidado a partir do estado original
-(defun copia-estado (estado)
-
-)
+(defun copia-estado (estado))
 
 ;;;ESTADOS-IGUAIS-P
 ;teste que recebe dois estados <estado1> e <estado2> , devolvendo o valor logico
@@ -163,24 +168,24 @@
 (defstruct problema estado-inicial solucao accoes resultado custo-caminho)
 
 ;;;SOLUCAO
-(defun solucao (estado)
-
-)
+;;;funcao recebe um <estado> e devolve o valor logico verdade se o estado recebido
+;;;corresponder a uma solucao, e falso caso contrario
+(defun solucao (estado))
 
 ;;;ACCOES
-(defun accoes (estado)
-
-)
+;;;funcao recebe um <estado> e devolve uma lista de accoes correspondendo a todas as
+;;;accoes validas que podem ser feitas com a proxima peca a ser colocada
+(defun accoes (estado))
 
 ;;;RESULTADO
-(defun resultado (estado accao)
-
-)
+;;;funcao recebe um <estado> e uma <accao>, e devolve um novo estado que resulta de
+;;;aplicar a accao recebida ao estado original
+(defun resultado (estado accao))
 
 ;;;QUALIDADE
-(defun qualidade (estado)
-
-)
+;;;funcao que recebe um <estado> e retorna um valor de qualidade que corresponde ao
+;;;valor negativo dos pontos ganhos ate ao momento
+(defun qualidade (estado))
 
 ;;;CUSTO-OPURTUNIDADE
 (defun custo-opurtunidade (estado)
