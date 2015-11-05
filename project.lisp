@@ -69,7 +69,6 @@
     )
   )
   
-
 ;;;TABULEIRO-LINHA-COMPLETA-P
 ;;;reconhecedor recebe um <tabuleiro>, um inteiro que equivale ao numero de uma
 ;;;linha <l> e devolve o valor logico verdade se todas as posicoes da linha 
@@ -83,10 +82,20 @@
   t
 )
 
+;;;TABULEIRO-PREENCHE!
+;;;modificador recebe um <tabuleiro>, um inteiro <l> que equivale ao numero
+;;;da linha e um inteiro <c> que equivale ao numero da coluna e altera o
+;;;tabuleiro recebido para a posicao correspondente a linha e coluna passar a 
+;;;estar preenchido
 (defun tabuleiro-preenche! (tabuleiro l c)
   (setf (aref tabuleiro (1- l) (1- c)) T)
 )
 
+;;;TABULEIRO-REMOVE-LINHA!
+;;;modificador que recebe um <tabuleiro>, um inteiro <l> correspondente ao
+;;;numero da linha, e altera o tabuleiro recebido removendo essa linha do
+;;;tabuleiro, e fazendo com que as linhas por cima da linha removida descam
+;;;uma linha
 (defun tabuleiro-remove-linha! (tabuleiro l)
   (if (and (<= l (car (array-dimensions tabuleiro))) (> l 0))
       (let ((c (1- (cadr (array-dimensions tabuleiro)))))
@@ -97,18 +106,32 @@
     )
 )
 
+;;;TABULEIRO-TOPO-PREENCHIDO-P
+;;;reconhecedor recebe um <tabuleiro>, e devolve o valor logico verdade se
+;;;existir alguma posicao na linha do topo do tabuleiro que esteja preenchida,
+;;;e falso caso contrario
 (defun tabuleiro-topo-preenchido-p (tabuleiro)
   (tabuleiro-linha-completa-p tabuleiro 18)
 )
 
+;;;TABULEIROS-IGAUS-P
+;;;teste recebe dois tabuleiros <t1> e <t2>, e devolve o valor logico verdade se
+;;;os dois tabuleiros forem iguais, e falso caso contrario
 (defun tabuleiros-iguais-p (t1 t2)
   (equalp t1 t2)
 )
 
+;;;TABULEIRO->ARRAY
+;;;transformador de saida recebe um <tabuleiro> e devolve um novo array, que para
+;;;cada linha e coluna devera conter o valor logico correspondente a cada posicao
+;;;do tabuleiro
 (defun tabuleiro->array (tabuleiro)
   
 )
 
+;;;ARRAY->TABULEIRO
+;;;transformador de entrada recebe um <array> cujas posicoes logicas tem o valor
+;;;logico T ou Nil, e constroi um novo tabuleiro com o conteudo do array recebido
 (defun array->tabuleiro (array)
   
 )
@@ -149,7 +172,6 @@
     )
 )
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;;----------------------------- Problema ---------------------------------------
@@ -188,6 +210,8 @@
 (defun qualidade (estado))
 
 ;;;CUSTO-OPURTUNIDADE
+;;;funcao que recebe um <estado> e devolve o custo de opurtunidade de todas as accoes 
+;;;realizadas ate ao momento
 (defun custo-opurtunidade (estado)
 
 )
