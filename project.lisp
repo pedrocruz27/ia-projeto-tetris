@@ -68,10 +68,10 @@
 ;;;seletor recebe um <tabuleiro>, um inteiro <c> correspondete ao numero de uma coluna
 ;;;e devolve a altura da coluna de uma coluna
 (defun tabuleiro-altura-coluna (tabuleiro c)
-  (let ((l (1- (first (array-dimensions tabuleiro))))
+  (let ((l (first (array-dimensions tabuleiro)))
         (resultado 0))
     (dotimes (i l resultado) 
-      (if (tabuleiro-preenchido-p tabuleiro l c)
+      (if (tabuleiro-preenchido-p tabuleiro (1+ i) c)
           (incf RESULTADO)
         )
       )
@@ -83,7 +83,7 @@
 ;;;linha <l> e devolve o valor logico verdade se todas as posicoes da linha 
 ;;;recebida estiverem preenchidas, e falso caso contrario 
 (defun tabuleiro-linha-completa-p (tabuleiro l)
-  (let ()
+  (let ((c (cadr (array-dimensions tabuleiro))))
     (dotimes (i c) 
       (cond ((not(tabuleiro-preenchido-p tabuleiro l (1+ i))) (return-from tabuleiro-linha-completa-p nil)))
       )
@@ -107,7 +107,7 @@
 ;;;uma linha
 (defun tabuleiro-remove-linha! (tabuleiro l)
   (if (and (<= l (car (array-dimensions tabuleiro))) (> l 0))
-      (let ((c (1- (cadr (array-dimensions tabuleiro)))))
+      (let ((c (cadr (array-dimensions tabuleiro))))
         (dotimes (i c) 
           (setf (aref tabuleiro (1- l) i) NIL)
           )
