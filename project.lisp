@@ -85,11 +85,11 @@
 )
 
 (defun tabuleiro-todo-preenchido-p (tabuleiro)
-  
+  (tabuleiro-linha-completa-p (tabuleiro 18))
 )
 
 (defun tabuleiros-iguais-p (t1 t2)
-  
+  (equalp t1 t2)
 )
 
 (defun tabuleiro->array (tabuleiro)
