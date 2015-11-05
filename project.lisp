@@ -36,8 +36,8 @@
 ;;;COPIA-TABULEIRO
 ;;;construtor que recebe um <tabuleiro> e devolve um novo tabuleiro com o mesmo
 ;;;conteudo do tabuleiro recebido
-(defun copia-tabuleiro (array)
-  (let ((tabuleiro array)) tabuleiro)
+(defun copia-tabuleiro (tabuleiro)
+  (copy-seq tabuleiro)
 )
 
 ;;;TABULEIRO-PREENCHIDO-P
@@ -81,15 +81,17 @@
 )
 
 (defun tabuleiro-remove-linha! (tabuleiro l)
-  (let ((c (1- (cadr (array-dimensions tabuleiro)))))
-    (dotimes (i c) 
-      (setf (aref tabuleiro (1- l) (i)) NIL)
-      )
+  (if (and (<= l (car (array-dimensions tabuleiro))) (> l 0))
+      (let ((c (1- (cadr (array-dimensions tabuleiro)))))
+        (dotimes (i c) 
+          (setf (aref tabuleiro (1- l) (i)) NIL)
+          )
+        )
     )
 )
 
-(defun tabuleiro-todo-preenchido-p (tabuleiro)
-  (tabuleiro-linha-completa-p (tabuleiro 18))
+(defun tabuleiro-topo-preenchido-p (tabuleiro)
+  (tabuleiro-linha-completa-p tabuleiro 18)
 )
 
 (defun tabuleiros-iguais-p (t1 t2)
@@ -128,7 +130,7 @@
 ;teste que recebe dois estados <estado1> e <estado2> , devolvendo o valor logico
 ;verdade se os dois estados forem iguais e falso caso contrario
 (defun estados-iguais-p (estado1 estado2)
-
+  (equalp estado1 estado2)
 )
 
 ;;;ESTADO-FINAL-P
@@ -136,7 +138,10 @@
 ;;;um estado final onde o jogador ja nao possa fazer mais jogadas e falso caso
 ;;;contrario
 (defun estado-final-p (estado)
-
+  (if (or (estado-pecas-por-colocar-p nil) (tabuleiro-topo-preenchido-p estado))
+      T
+    NIL
+    )
 )
 
 
