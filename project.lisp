@@ -77,7 +77,7 @@
 (defun tabuleiro-linha-completa-p (tabuleiro l)
   (let ((c (1- (cadr (array-dimensions tabuleiro)))))
     (dotimes (i c) 
-      (cond ((not(tabuleiro-preenchido-p tabuleiro l c)) (return-from tabuleiro-linha-completa-p nil)))
+      (cond ((not(tabuleiro-preenchido-p tabuleiro l (1+ i))) (return-from tabuleiro-linha-completa-p nil)))
       )
     )
   t
