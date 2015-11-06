@@ -209,7 +209,7 @@
 ;;;funcao recebe um <estado> e devolve o valor logico verdade se o estado recebido
 ;;;corresponder a uma solucao, e falso caso contrario
 (defun solucao (estado)
-  (if (and (not(car(estado-pecas-por-colocar estado))) (not(tabuleiro-topo-preenchido-p (estado-taubleiro estado))))
+  (if (and (not(car(estado-pecas-por-colocar estado))) (not(tabuleiro-topo-preenchido-p (estado-tabuleiro estado))))
     t
     )
 )
