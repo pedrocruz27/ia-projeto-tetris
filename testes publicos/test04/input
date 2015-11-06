@@ -1,0 +1,18 @@
+;;; Teste 4
+;;; Testes tipo tabuleiro 2
+;;deve retornar IGNORE
+(ignore-value (setf tab1 (cria-tabuleiro)))
+;;deve retornar NIL
+(tabuleiro-preenchido-p tab1 5 5)
+;;deve retornar IGNORE
+(ignore-value (tabuleiro-preenche! tab1 5 5))
+;;deve retornar T
+(tabuleiro-preenchido-p tab1 5 5)
+;;deve retornar IGNORE
+(ignore-value (tabuleiro-preenche! tab1 35 5))
+;;deve retornar IGNORE
+(ignore-value (tabuleiro-preenche! tab1 5 35))
+;;deve retornar T
+(tabuleiro-preenchido-p tab1 5 5)
+;;deve retornar 6
+(tabuleiro-altura-coluna tab1 5)

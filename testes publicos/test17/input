@@ -1,0 +1,18 @@
+;;; Teste 17
+;;; Testes fn custo-oportunidade
+;;deve retornar 700
+(custo-oportunidade (make-estado :pontos 100 :pecas-por-colocar '(i) :pecas-colocadas '(i) :tabuleiro (cria-tabuleiro)))
+;;deve retornar 400
+(custo-oportunidade (make-estado :pontos 100 :pecas-por-colocar '(i) :pecas-colocadas '(j) :tabuleiro (cria-tabuleiro)))
+;;deve retornar 400
+(custo-oportunidade (make-estado :pontos 100 :pecas-por-colocar '(i) :pecas-colocadas '(l) :tabuleiro (cria-tabuleiro)))
+;;deve retornar 200
+(custo-oportunidade (make-estado :pontos 100 :pecas-por-colocar '(i) :pecas-colocadas '(s) :tabuleiro (cria-tabuleiro)))
+;;deve retornar 200
+(custo-oportunidade (make-estado :pontos 100 :pecas-por-colocar '(i) :pecas-colocadas '(z) :tabuleiro (cria-tabuleiro)))
+;;deve retornar 200
+(custo-oportunidade (make-estado :pontos 100 :pecas-por-colocar '(i) :pecas-colocadas '(t) :tabuleiro (cria-tabuleiro)))
+;;deve retornar 200
+(custo-oportunidade (make-estado :pontos 100 :pecas-por-colocar '(i) :pecas-colocadas '(o) :tabuleiro (cria-tabuleiro)))
+;;deve retornar 850
+(custo-oportunidade (make-estado :pontos 50 :pecas-por-colocar '(i) :pecas-colocadas '(z z z) :tabuleiro (cria-tabuleiro)))

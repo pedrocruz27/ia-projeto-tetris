@@ -1,0 +1,24 @@
+;;; Teste 8
+;;; Testes tipo estado 2
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar NIL
+NIL
+;;retorna 50
+50
+;;retorna (I J)
+(I J)
+;;deve retornar NIL
+NIL
+;;retorna (Z Z Z)
+(Z Z Z)
+;;deve retornar NIL
+NIL
+;;deve retornar T
+T
+;;deve retornar T
+T
+;;deve retornar NIL
+NIL

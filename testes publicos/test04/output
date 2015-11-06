@@ -1,0 +1,18 @@
+;;; Teste 4
+;;; Testes tipo tabuleiro 2
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar NIL
+NIL
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar T
+T
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar T
+T
+;;deve retornar 6
+6

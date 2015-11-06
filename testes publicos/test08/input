@@ -1,0 +1,24 @@
+;;; Teste 8
+;;; Testes tipo estado 2
+;;deve retornar IGNORE
+(ignore-value (setf estado1 (make-estado :pontos 50 :pecas-por-colocar '(i j) :pecas-colocadas '(z z z) :tabuleiro (cria-tabuleiro))))
+;;deve retornar IGNORE
+(ignore-value (setf estado2 (copia-estado estado1)))
+;;deve retornar NIL
+(eq estado1 estado2)
+;;retorna 50
+(estado-pontos estado2)
+;;retorna '(I J)
+(estado-pecas-por-colocar estado2)
+;;deve retornar NIL
+(eq (estado-pecas-por-colocar estado1) (estado-pecas-por-colocar estado2))
+;;retorna '(Z Z Z)
+(estado-pecas-colocadas estado2)
+;;deve retornar NIL
+(eq (estado-pecas-colocadas estado1) (estado-pecas-colocadas estado2))
+;;deve retornar T
+(tabuleiros-iguais-p (cria-tabuleiro) (estado-tabuleiro estado2))
+;;deve retornar T
+(tabuleiros-iguais-p (estado-tabuleiro estado1) (estado-tabuleiro estado2))
+;;deve retornar NIL
+(eq (estado-tabuleiro estado1) (estado-tabuleiro estado2))

@@ -1,0 +1,24 @@
+;;; Teste 10
+;;; Testes tipo estado 4
+;;deve retornar T
+(estado-final-p (make-estado :pontos 0 :pecas-por-colocar NIL :pecas-colocadas NIL :tabuleiro (cria-tabuleiro)))
+;;deve retornar NIL
+(estado-final-p (make-estado :pontos 0 :pecas-por-colocar '(i) :pecas-colocadas NIL :tabuleiro (cria-tabuleiro)))
+;;deve retornar IGNORE
+(ignore-value (setf t1 (cria-tabuleiro)))
+;;deve retornar IGNORE
+(ignore-value (dotimes (coluna 10)
+  (tabuleiro-preenche! t1 17 coluna)))
+;;deve retornar IGNORE
+(ignore-value (setf estado1 (make-estado :pontos 0 :pecas-por-colocar '(i j z) :pecas-colocadas NIL :tabuleiro t1)))
+;;deve retornar T
+(estado-final-p estado1)
+;;deve retornar IGNORE
+(ignore-value (setf t2 (cria-tabuleiro)))
+;;deve retornar IGNORE
+(ignore-value (dotimes (coluna 10)
+  (tabuleiro-preenche! t2 16 coluna)))
+;;deve retornar IGNORE
+(ignore-value (setf estado2 (make-estado :pontos 0 :pecas-por-colocar '(i j z) :pecas-colocadas NIL :tabuleiro t2)))
+;;deve retornar NIL
+(estado-final-p estado2)

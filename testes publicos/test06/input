@@ -1,0 +1,12 @@
+;;; Teste 6
+;;; Testes tipo tabuleiro 4
+;;deve retornar IGNORE
+(ignore-value (setf tab1 (cria-tabuleiro)))
+;;deve retornar T
+(arrayp (tabuleiro->array tab1))
+;;deve retornar T
+(equal '(18 10) (array-dimensions (tabuleiro->array tab1)))
+;;deve retornar IGNORE
+(ignore-value (setf tab2 (array->tabuleiro (tabuleiro->array tab1))))
+;;deve retornar T
+(tabuleiros-iguais-p tab1 tab2)

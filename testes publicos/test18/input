@@ -1,0 +1,16 @@
+;;; Teste 18
+;;; Testes fn resultado com pecas mais dificeis
+;;deve retornar IGNORE
+(ignore-value (setf estado1 (make-estado :pontos 0 :pecas-por-colocar '(t i j t z j) :pecas-colocadas '() :tabuleiro (cria-tabuleiro))))
+;;deve retornar IGNORE
+(ignore-value (setf estado2 (resultado estado1 '(0 . #2A((T T T)(NIL T NIL))))))
+;;deve retornar IGNORE
+(ignore-value (setf estado2 (resultado estado2 '(1 . #2A((T)(T)(T)(T))))))
+;;deve retornar IGNORE
+(ignore-value (setf estado2 (resultado estado2 '(1 . #2A((NIL NIL T)(T T T))))))
+;;deve retornar IGNORE
+(ignore-value (setf estado2 (resultado estado2 '(3 . #2A((NIL T NIL)(T T T))))))
+;;deve retornar IGNORE
+(ignore-value (setf estado2 (resultado estado2 '(6 . #2A((NIL T T)(T T NIL))))))
+;;deve retornar um array com as pecas colocadas nas posicoes certas, vejam o output
+(tabuleiro->array (estado-tabuleiro estado2))

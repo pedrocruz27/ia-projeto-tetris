@@ -1,0 +1,24 @@
+;;; Teste 12
+;;; Testes fn solucao
+;;deve retornar NIL
+(solucao (make-estado :pontos 50 :pecas-por-colocar '(i j) :pecas-colocadas '(z z z) :tabuleiro (cria-tabuleiro)))
+;;deve retornar T
+(solucao (make-estado :pontos 50 :pecas-por-colocar '() :pecas-colocadas '(z z z) :tabuleiro (cria-tabuleiro)))
+;;deve retornar IGNORE
+(ignore-value (setf t1 (cria-tabuleiro)))
+;;deve retornar IGNORE
+(ignore-value (dotimes (coluna 10)
+  (tabuleiro-preenche! t1 17 coluna)))
+;;deve retornar IGNORE
+(ignore-value (setf estado1 (make-estado :pontos 50 :pecas-por-colocar '(i j) :pecas-colocadas '(z z z) :tabuleiro t1)))
+;;deve retornar NIL
+(solucao estado1)
+;;deve retornar IGNORE
+(ignore-value (setf t2 (cria-tabuleiro)))
+;;deve retornar IGNORE
+(ignore-value (dotimes (coluna 10)
+  (tabuleiro-preenche! t2 16 coluna)))
+;;deve retornar IGNORE
+(ignore-value (setf estado2 (make-estado :pontos 50 :pecas-por-colocar '(i j) :pecas-colocadas '(z z z) :tabuleiro t2)))
+;;deve retornar NIL
+(solucao estado2)

@@ -1,0 +1,22 @@
+;;; Teste 12
+;;; Testes fn solucao
+;;deve retornar NIL
+NIL
+;;deve retornar T
+T
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar NIL
+NIL
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar NIL
+NIL

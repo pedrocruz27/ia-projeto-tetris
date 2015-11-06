@@ -1,0 +1,14 @@
+;;; Teste 14
+;;; Testes fn resultado
+;;deve retornar IGNORE
+(ignore-value (setf estado1 (make-estado :pontos 50 :pecas-por-colocar '(i j) :pecas-colocadas '(z z z) :tabuleiro (cria-tabuleiro))))
+;;deve retornar IGNORE
+(ignore-value (setf estado2 (resultado estado1 '(3 . #2A((T T nil)(nil T T))))))
+;;deve retornar NIL
+(eq estado1 estado2)
+;;deve retornar '(I Z Z Z)
+(estado-pecas-colocadas estado2)
+;;deve retornar '(J)
+(estado-pecas-por-colocar estado2)
+;;deve retornar 50
+(estado-pontos estado2)

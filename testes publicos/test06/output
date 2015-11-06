@@ -1,0 +1,12 @@
+;;; Teste 6
+;;; Testes tipo tabuleiro 4
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar T
+T
+;;deve retornar T
+T
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar T
+T

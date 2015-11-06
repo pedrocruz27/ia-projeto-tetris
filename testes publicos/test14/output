@@ -1,0 +1,14 @@
+;;; Teste 14
+;;; Testes fn resultado
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar NIL
+NIL
+;;deve retornar (I Z Z Z)
+(I Z Z Z)
+;;deve retornar (J)
+(J)
+;;deve retornar 50
+50
