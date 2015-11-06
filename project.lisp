@@ -1,6 +1,6 @@
 ;;; GRUPO: 21 || ALUNOS: Henrique Lourenco - 77459 / Jose Touret - 78215 / Pedro Cruz - 78579 
 
-(load "utils.fas")
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -100,6 +100,8 @@
 ;;;tabuleiro recebido para a posicao correspondente a linha e coluna passar a 
 ;;;estar preenchido
 (defun tabuleiro-preenche! (tabuleiro l c)
+  (if (and (<= l (car (array-dimensions tabuleiro))) (> l 0))
+      (if (and (<= c (cadr (array-dimensions tabuleiro))) (> c 0))
   (setf (aref tabuleiro (1- l) (1- c)) T)
 )
 
@@ -138,14 +140,14 @@
 ;;;cada linha e coluna devera conter o valor logico correspondente a cada posicao
 ;;;do tabuleiro
 (defun tabuleiro->array (tabuleiro)
-  
+  tabuleiro
 )
 
 ;;;ARRAY->TABULEIRO
 ;;;transformador de entrada recebe um <array> cujas posicoes logicas tem o valor
 ;;;logico T ou Nil, e constroi um novo tabuleiro com o conteudo do array recebido
 (defun array->tabuleiro (array)
-  
+  tabuleiro
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
