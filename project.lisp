@@ -232,7 +232,7 @@
 ;;;funcao que recebe um <estado> e retorna um valor de qualidade que corresponde ao
 ;;;valor negativo dos pontos ganhos ate ao momento
 (defun qualidade (estado)
-
+  (* (car(estado-pontos estado)) -1)
 )
 
 ;;;CUSTO-OPURTUNIDADE
