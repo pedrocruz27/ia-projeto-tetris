@@ -1,6 +1,6 @@
 ;;; GRUPO: 21 || ALUNOS: Henrique Lourenco - 77459 / Jose Touret - 78215 / Pedro Cruz - 78579 
 
-
+(load "utils.fas")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -103,6 +103,8 @@
   (if (and (<= l (car (array-dimensions tabuleiro))) (> l 0))
       (if (and (<= c (cadr (array-dimensions tabuleiro))) (> c 0))
   (setf (aref tabuleiro (1- l) (1- c)) T)
+        )
+    )
 )
 
 ;;;TABULEIRO-REMOVE-LINHA!
@@ -139,16 +141,16 @@
 ;;;transformador de saida recebe um <tabuleiro> e devolve um novo array, que para
 ;;;cada linha e coluna devera conter o valor logico correspondente a cada posicao
 ;;;do tabuleiro
-(defun tabuleiro->array (tabuleiro)
-  tabuleiro
-)
+;(defun tabuleiro->array (tabuleiro)
+;  tabuleiro
+;)
 
 ;;;ARRAY->TABULEIRO
 ;;;transformador de entrada recebe um <array> cujas posicoes logicas tem o valor
 ;;;logico T ou Nil, e constroi um novo tabuleiro com o conteudo do array recebido
-(defun array->tabuleiro (array)
-  tabuleiro
-)
+;(defun array->tabuleiro (array)
+;  array
+;)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -221,16 +223,16 @@
 ;;;ACCOES
 ;;;funcao recebe um <estado> e devolve uma lista de accoes correspondendo a todas as
 ;;;accoes validas que podem ser feitas com a proxima peca a ser colocada
-(defun accoes (estado)
+;(defun accoes (estado)
   
-)
+;)
 
 ;;;RESULTADO
 ;;;funcao recebe um <estado> e uma <accao>, e devolve um novo estado que resulta de
 ;;;aplicar a accao recebida ao estado original
-(defun resultado (estado accao)
+;(defun resultado (estado accao)
 
-)
+;)
 
 ;;;QUALIDADE
 ;;;funcao que recebe um <estado> e retorna um valor de qualidade que corresponde ao
@@ -242,6 +244,6 @@
 ;;;CUSTO-OPURTUNIDADE
 ;;;funcao que recebe um <estado> e devolve o custo de opurtunidade de todas as accoes 
 ;;;realizadas ate ao momento
-(defun custo-opurtunidade (estado)
+;(defun custo-opurtunidade (estado)
 
-)
+;)
