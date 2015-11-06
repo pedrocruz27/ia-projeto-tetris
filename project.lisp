@@ -67,7 +67,7 @@
 
 ;;;TABULEIRO-ALTURA-COLUNA
 ;;;seletor recebe um <tabuleiro>, um inteiro <c> correspondete ao numero de uma coluna
-;;;e devolve a altura da coluna de uma coluna
+;;;e devolve a altura da coluna, ou seja, a posicao mais alta preenchida dessa coluna
 (defun tabuleiro-altura-coluna (tabuleiro c)
   (let ((l (first (array-dimensions tabuleiro)))
         (resultado 0))
@@ -232,7 +232,7 @@
 ;;;funcao que recebe um <estado> e retorna um valor de qualidade que corresponde ao
 ;;;valor negativo dos pontos ganhos ate ao momento
 (defun qualidade (estado)
-  (* (car(estado-pontos estado)) -1)
+  (* (estado-pontos estado) -1)
 )
 
 ;;;CUSTO-OPURTUNIDADE
