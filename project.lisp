@@ -1,6 +1,6 @@
 ;;; GRUPO: 21 || ALUNOS: Henrique Lourenco - 77459 / Jose Touret - 78215 / Pedro Cruz - 78579 
 
-;(load "utils.fas")
+(load "utils.fas")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -64,7 +64,7 @@
 ;;;e um inteiro <c> que equivale ao numero da coluna e devolve o valor logico verdade
 ;;;se essa posicao estiver preenchida, falso caso contrario 
 (defun tabuleiro-preenchido-p (tabuleiro l c)
-  (aref tabuleiro (1- l) (1- c))
+  (aref tabuleiro l c)
 )
 
 ;;;TABULEIRO-ALTURA-COLUNA
@@ -74,8 +74,8 @@
   (let ((l (first (array-dimensions tabuleiro)))
         (resultado 0))
     (dotimes (i l resultado) 
-      (if (tabuleiro-preenchido-p tabuleiro (1+ i) c)
-          (incf RESULTADO)
+      (if (tabuleiro-preenchido-p tabuleiro i (1- c))
+          (setf resultado (1+ i))
         )
       )
     )
@@ -88,7 +88,7 @@
 (defun tabuleiro-linha-completa-p (tabuleiro l)
   (let ((c (cadr (array-dimensions tabuleiro))))
     (dotimes (i c) 
-      (cond ((not(tabuleiro-preenchido-p tabuleiro l (1+ i))) (return-from tabuleiro-linha-completa-p nil)))
+      (cond ((not(tabuleiro-preenchido-p tabuleiro (1- l)  i)) (return-from tabuleiro-linha-completa-p nil)))
       )
     )
   t
@@ -100,9 +100,9 @@
 ;;;tabuleiro recebido para a posicao correspondente a linha e coluna passar a 
 ;;;estar preenchido
 (defun tabuleiro-preenche! (tabuleiro l c)
-  (if (and (<= l (car (array-dimensions tabuleiro))) (> l 0))
-      (if (and (<= c (cadr (array-dimensions tabuleiro))) (> c 0))
-  (setf (aref tabuleiro (1- l) (1- c)) T)
+  (if (and (< l (car (array-dimensions tabuleiro))) (>= l 0))
+      (if (and (< c (cadr (array-dimensions tabuleiro))) (>= c 0))
+  (setf (aref tabuleiro l c) T)
         )
     )
 )
