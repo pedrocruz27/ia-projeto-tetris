@@ -86,9 +86,9 @@
 ;;;linha <l> e devolve o valor logico verdade se todas as posicoes da linha 
 ;;;recebida estiverem preenchidas, e falso caso contrario 
 (defun tabuleiro-linha-completa-p (tabuleiro l)
-  (let ((c (cadr (array-dimensions tabuleiro))))
+  (let ((c (1-(cadr (array-dimensions tabuleiro)))))
     (dotimes (i c) 
-      (cond ((not(tabuleiro-preenchido-p tabuleiro (1- l)  i)) (return-from tabuleiro-linha-completa-p nil)))
+      (cond ((not(tabuleiro-preenchido-p tabuleiro l  i)) (return-from tabuleiro-linha-completa-p nil)))
       )
     )
   t
@@ -127,7 +127,12 @@
 ;;;existir alguma posicao na linha do topo do tabuleiro que esteja preenchida,
 ;;;e falso caso contrario
 (defun tabuleiro-topo-preenchido-p (tabuleiro)
-  (tabuleiro-linha-completa-p tabuleiro 18)
+  (let ((c (1-(cadr (array-dimensions tabuleiro)))))
+    (dotimes (i c) 
+      (cond ((tabuleiro-preenchido-p tabuleiro 17  i) (return-from tabuleiro-topo-preenchido-p t)))
+      )
+    )
+  nil
 )
 
 ;;;TABULEIROS-IGAUS-P
