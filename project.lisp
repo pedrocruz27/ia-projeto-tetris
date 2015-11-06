@@ -1,5 +1,7 @@
 ;;; GRUPO: 21 || ALUNOS: Henrique Lourenco - 77459 / Jose Touret - 78215 / Pedro Cruz - 78579 
 
+(load "utils.fas")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;-------------------------------- Accao ----------------------------------------
@@ -171,8 +173,8 @@
 )
 
 ;;;ESTADOS-IGUAIS-P
-;teste que recebe dois estados <estado1> e <estado2> , devolvendo o valor logico
-;verdade se os dois estados forem iguais e falso caso contrario
+;;;teste que recebe dois estados <estado1> e <estado2> , devolvendo o valor logico
+;;;verdade se os dois estados forem iguais e falso caso contrario
 (defun estados-iguais-p (estado1 estado2)
   (equalp estado1 estado2)
 )
