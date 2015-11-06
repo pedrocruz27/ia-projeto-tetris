@@ -71,13 +71,13 @@
 ;;;seletor recebe um <tabuleiro>, um inteiro <c> correspondete ao numero de uma coluna
 ;;;e devolve a altura da coluna, ou seja, a posicao mais alta preenchida dessa coluna
 (defun tabuleiro-altura-coluna (tabuleiro c)
-  (let ((l (first (array-dimensions tabuleiro)))
-        (resultado 0))
-    (dotimes (i l resultado) 
-      (if (tabuleiro-preenchido-p tabuleiro i (1- c))
-          (setf resultado (1+ i))
+  (let ((l (first (array-dimensions tabuleiro))))
+    (dotimes (i l) 
+      (if (tabuleiro-preenchido-p tabuleiro  (1- (- l  i)) c)
+          (return-from tabuleiro-altura-coluna  (- l  i))
         )
       )
+    0
     )
 )
   
