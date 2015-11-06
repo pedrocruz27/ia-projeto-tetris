@@ -38,7 +38,7 @@
 ;;;construtor que nao recebe qualquer argumento e devolve um novo tabuleiro vazio 
 (defun cria-tabuleiro ()
   (make-array '(18 10))
-  )
+)
 
 ;;;COPIA-TABULEIRO
 ;;;construtor que recebe um <tabuleiro> e devolve um novo tabuleiro com o mesmo
@@ -63,7 +63,7 @@
 ;;;se essa posicao estiver preenchida, falso caso contrario 
 (defun tabuleiro-preenchido-p (tabuleiro l c)
   (aref tabuleiro (1- l) (1- c))
-  )
+)
 
 ;;;TABULEIRO-ALTURA-COLUNA
 ;;;seletor recebe um <tabuleiro>, um inteiro <c> correspondete ao numero de uma coluna
@@ -77,7 +77,7 @@
         )
       )
     )
-  )
+)
   
 ;;;TABULEIRO-LINHA-COMPLETA-P
 ;;;reconhecedor recebe um <tabuleiro>, um inteiro que equivale ao numero de uma
@@ -208,22 +208,32 @@
 ;;;SOLUCAO
 ;;;funcao recebe um <estado> e devolve o valor logico verdade se o estado recebido
 ;;;corresponder a uma solucao, e falso caso contrario
-(defun solucao (estado))
+(defun solucao (estado)
+  (if (and (not(car(estado-pecas-por-colocar estado))) (not(tabuleiro-topo-preenchido-p (estado-taubleiro estado))))
+    t
+    )
+)
 
 ;;;ACCOES
 ;;;funcao recebe um <estado> e devolve uma lista de accoes correspondendo a todas as
 ;;;accoes validas que podem ser feitas com a proxima peca a ser colocada
-(defun accoes (estado))
+(defun accoes (estado)
+  
+)
 
 ;;;RESULTADO
 ;;;funcao recebe um <estado> e uma <accao>, e devolve um novo estado que resulta de
 ;;;aplicar a accao recebida ao estado original
-(defun resultado (estado accao))
+(defun resultado (estado accao)
+
+)
 
 ;;;QUALIDADE
 ;;;funcao que recebe um <estado> e retorna um valor de qualidade que corresponde ao
 ;;;valor negativo dos pontos ganhos ate ao momento
-(defun qualidade (estado))
+(defun qualidade (estado)
+
+)
 
 ;;;CUSTO-OPURTUNIDADE
 ;;;funcao que recebe um <estado> e devolve o custo de opurtunidade de todas as accoes 
