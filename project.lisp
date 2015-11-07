@@ -1,5 +1,7 @@
 ;;; GRUPO: 21 || ALUNOS: Henrique Lourenco - 77459 / Jose Touret - 78215 / Pedro Cruz - 78579 
 
+(load "utils.fas")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;-------------------------------- Accao ----------------------------------------
@@ -11,7 +13,7 @@
 ;;;esquerda a partir da qual a peca vai ser colocada, e um array <peca> com a 
 ;;;configuracao da peca a colocar, devolvendo uma nova accao
 (defun cria-accao (c peca)
- (cons c peca)
+  (cons c peca)
 )
 
 ;;;ACCAO-COLUNA
@@ -62,20 +64,20 @@
 ;;;e um inteiro <c> que equivale ao numero da coluna e devolve o valor logico verdade
 ;;;se essa posicao estiver preenchida, falso caso contrario 
 (defun tabuleiro-preenchido-p (tabuleiro l c)
-  (aref tabuleiro (1- l) (1- c))
+  (aref tabuleiro l c)
 )
 
 ;;;TABULEIRO-ALTURA-COLUNA
 ;;;seletor recebe um <tabuleiro>, um inteiro <c> correspondete ao numero de uma coluna
-;;;e devolve a altura da coluna de uma coluna
+;;;e devolve a altura da coluna, ou seja, a posicao mais alta preenchida dessa coluna
 (defun tabuleiro-altura-coluna (tabuleiro c)
-  (let ((l (first (array-dimensions tabuleiro)))
-        (resultado 0))
-    (dotimes (i l resultado) 
-      (if (tabuleiro-preenchido-p tabuleiro (1+ i) c)
-          (incf RESULTADO)
+  (let ((l (first (array-dimensions tabuleiro))))
+    (dotimes (i l) 
+      (if (tabuleiro-preenchido-p tabuleiro  (1- (- l  i)) c)
+          (return-from tabuleiro-altura-coluna  (- l  i))
         )
       )
+    0
     )
 )
   
@@ -84,9 +86,9 @@
 ;;;linha <l> e devolve o valor logico verdade se todas as posicoes da linha 
 ;;;recebida estiverem preenchidas, e falso caso contrario 
 (defun tabuleiro-linha-completa-p (tabuleiro l)
-  (let ((c (cadr (array-dimensions tabuleiro))))
+  (let ((c (1-(cadr (array-dimensions tabuleiro)))))
     (dotimes (i c) 
-      (cond ((not(tabuleiro-preenchido-p tabuleiro l (1+ i))) (return-from tabuleiro-linha-completa-p nil)))
+      (cond ((not(tabuleiro-preenchido-p tabuleiro l  i)) (return-from tabuleiro-linha-completa-p nil)))
       )
     )
   t
@@ -98,7 +100,11 @@
 ;;;tabuleiro recebido para a posicao correspondente a linha e coluna passar a 
 ;;;estar preenchido
 (defun tabuleiro-preenche! (tabuleiro l c)
-  (setf (aref tabuleiro (1- l) (1- c)) T)
+  (if (and (< l (car (array-dimensions tabuleiro))) (>= l 0))
+      (if (and (< c (cadr (array-dimensions tabuleiro))) (>= c 0))
+  (setf (aref tabuleiro l c) T)
+        )
+    )
 )
 
 ;;;TABULEIRO-REMOVE-LINHA!
@@ -121,10 +127,15 @@
 ;;;existir alguma posicao na linha do topo do tabuleiro que esteja preenchida,
 ;;;e falso caso contrario
 (defun tabuleiro-topo-preenchido-p (tabuleiro)
-  (tabuleiro-linha-completa-p tabuleiro 18)
+  (let ((c (1-(cadr (array-dimensions tabuleiro)))))
+    (dotimes (i c) 
+      (cond ((tabuleiro-preenchido-p tabuleiro 17  i) (return-from tabuleiro-topo-preenchido-p t)))
+      )
+    )
+  nil
 )
 
-;;;TABULEIROS-IGAUS-P
+;;;TABULEIROS-IGUAIS-P
 ;;;teste recebe dois tabuleiros <t1> e <t2>, e devolve o valor logico verdade se
 ;;;os dois tabuleiros forem iguais, e falso caso contrario
 (defun tabuleiros-iguais-p (t1 t2)
@@ -136,14 +147,14 @@
 ;;;cada linha e coluna devera conter o valor logico correspondente a cada posicao
 ;;;do tabuleiro
 (defun tabuleiro->array (tabuleiro)
-  
+  tabuleiro
 )
 
 ;;;ARRAY->TABULEIRO
 ;;;transformador de entrada recebe um <array> cujas posicoes logicas tem o valor
 ;;;logico T ou Nil, e constroi um novo tabuleiro com o conteudo do array recebido
 (defun array->tabuleiro (array)
-  
+  array
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -164,15 +175,15 @@
 ;;;copidado a partir do estado original
 (defun copia-estado (estado)
   (make-estado :pontos (estado-pontos estado)
-               :pecas-por-colocar (estado-pecas-por-colocar estado)
-               :pecas-colocadas (estado-pecas-colocadas estado)
-               :tabuleiro (estado-tabuleiro estado)
+               :pecas-por-colocar (copy-list (estado-pecas-por-colocar estado))
+               :pecas-colocadas (copy-list (estado-pecas-colocadas estado))
+               :tabuleiro (copia-tabuleiro (estado-tabuleiro estado))
                )
 )
 
 ;;;ESTADOS-IGUAIS-P
-;teste que recebe dois estados <estado1> e <estado2> , devolvendo o valor logico
-;verdade se os dois estados forem iguais e falso caso contrario
+;;;teste que recebe dois estados <estado1> e <estado2> , devolvendo o valor logico
+;;;verdade se os dois estados forem iguais e falso caso contrario
 (defun estados-iguais-p (estado1 estado2)
   (equalp estado1 estado2)
 )
@@ -209,7 +220,7 @@
 ;;;funcao recebe um <estado> e devolve o valor logico verdade se o estado recebido
 ;;;corresponder a uma solucao, e falso caso contrario
 (defun solucao (estado)
-  (if (and (not(car(estado-pecas-por-colocar estado))) (not(tabuleiro-topo-preenchido-p (estado-taubleiro estado))))
+  (if (and (not(car(estado-pecas-por-colocar estado))) (not(tabuleiro-topo-preenchido-p (estado-tabuleiro estado))))
     t
     )
 )
@@ -217,27 +228,27 @@
 ;;;ACCOES
 ;;;funcao recebe um <estado> e devolve uma lista de accoes correspondendo a todas as
 ;;;accoes validas que podem ser feitas com a proxima peca a ser colocada
-(defun accoes (estado)
+;(defun accoes (estado)
   
-)
+;)
 
 ;;;RESULTADO
 ;;;funcao recebe um <estado> e uma <accao>, e devolve um novo estado que resulta de
 ;;;aplicar a accao recebida ao estado original
-(defun resultado (estado accao)
+;(defun resultado (estado accao)
 
-)
+;)
 
 ;;;QUALIDADE
 ;;;funcao que recebe um <estado> e retorna um valor de qualidade que corresponde ao
 ;;;valor negativo dos pontos ganhos ate ao momento
 (defun qualidade (estado)
-  (* (car(estado-pontos estado)) -1)
+  (* (estado-pontos estado) -1)
 )
 
 ;;;CUSTO-OPURTUNIDADE
 ;;;funcao que recebe um <estado> e devolve o custo de opurtunidade de todas as accoes 
 ;;;realizadas ate ao momento
-(defun custo-opurtunidade (estado)
+;(defun custo-opurtunidade (estado)
 
-)
+;)
