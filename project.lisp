@@ -13,7 +13,7 @@
 ;;;esquerda a partir da qual a peca vai ser colocada, e um array <peca> com a 
 ;;;configuracao da peca a colocar, devolvendo uma nova accao
 (defun cria-accao (c peca)
- (cons c peca)
+  (cons c peca)
 )
 
 ;;;ACCAO-COLUNA
@@ -113,11 +113,13 @@
 ;;;tabuleiro, e fazendo com que as linhas por cima da linha removida descam
 ;;;uma linha
 (defun tabuleiro-remove-linha! (tabuleiro l)
-  (if (and (<= l (car (array-dimensions tabuleiro))) (> l 0))
+  (if (and (<= l (car (array-dimensions tabuleiro))) (>= l 0))
       (let ((c (cadr (array-dimensions tabuleiro))))
-        (dotimes (i c) 
-          (setf (aref tabuleiro l i) (aref tabuleiro (1+ l) i))
-          (setf (aref tabuleiro (1+ l) i) NIL)
+        (dotimes (i c)
+          (dotimes (j (1- (- (car (array-dimensions tabuleiro)) l)))
+            (setf (aref tabuleiro (+ j l) i) (aref tabuleiro (1+ (+ j l)) i))
+            )
+          (setf (aref tabuleiro (1- (car (array-dimensions tabuleiro))) i) NIL)
           )
         )
     )
