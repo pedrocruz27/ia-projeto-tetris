@@ -1,6 +1,6 @@
 ;;; GRUPO: 21 || ALUNOS: Henrique Lourenco - 77459 / Jose Touret - 78215 / Pedro Cruz - 78579 
 
-(load "utils.fas")
+;(load "utils.fas")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -13,7 +13,7 @@
 ;;;esquerda a partir da qual a peca vai ser colocada, e um array <peca> com a 
 ;;;configuracao da peca a colocar, devolvendo uma nova accao
 (defun cria-accao (c peca)
-  (cons c peca)
+ (cons c peca)
 )
 
 ;;;ACCAO-COLUNA
