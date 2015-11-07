@@ -1,6 +1,6 @@
 ;;; GRUPO: 21 || ALUNOS: Henrique Lourenco - 77459 / Jose Touret - 78215 / Pedro Cruz - 78579 
 
-;(load "utils.fas")
+(load "utils.fas")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -145,7 +145,7 @@
   (let ((l (1- (car (array-dimensions t1))))
         (c (1- (cadr (array-dimensions t1))))
         )
-    (if (or (not (equalp l (car (array-dimensions t2))) (equalp c (cadr (array-dimensions t1)))))
+    (if (or (not (equalp l (1- (car (array-dimensions t2))))) (not (equalp c (1- (cadr (array-dimensions t1))))))
         (return-from tabuleiros-iguais-p nil) 
           )
     (dotimes (i l)
