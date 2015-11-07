@@ -1,6 +1,6 @@
 ;;; GRUPO: 21 || ALUNOS: Henrique Lourenco - 77459 / Jose Touret - 78215 / Pedro Cruz - 78579 
 
-(load "utils.fas")
+;(load "utils.fas")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -142,7 +142,21 @@
 ;;;teste recebe dois tabuleiros <t1> e <t2>, e devolve o valor logico verdade se
 ;;;os dois tabuleiros forem iguais, e falso caso contrario
 (defun tabuleiros-iguais-p (t1 t2)
-  (equalp t1 t2)
+  (let ((l (1- (car (array-dimensions t1))))
+        (c (1- (cadr (array-dimensions t1))))
+        )
+    (if (or (not (equalp l (car (array-dimensions t2))) (equalp c (cadr (array-dimensions t1)))))
+        (return-from tabuleiros-iguais-p nil) 
+          )
+    (dotimes (i l)
+      (dotimes (j c)
+        (if (not (equalp (aref t1 i j) (aref t2 i j)))
+           (return-from tabuleiros-iguais-p nil)
+          )
+        )
+      )
+    t
+    )
 )
 
 ;;;TABULEIRO->ARRAY
