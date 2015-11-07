@@ -14,21 +14,21 @@
 ;;;configuracao da peca a colocar, devolvendo uma nova accao
 (defun cria-accao (c peca)
   (cons c peca)
-)
+  )
 
 ;;;ACCAO-COLUNA
 ;;;selector devolve um inteiro correspondente a coluna mais a esquerda a partir
 ;;;da qual a peca vai ser colocada
 (defun accao-coluna (accao)
   (car accao)
-)
+  )
 
 ;;;ACCAO-PECA
 ;;;seletor devolve o array com a configuracao geometrica exacta com que vai 
 ;;;ser colocada
 (defun accao-peca (accao)
   (cdr accao)
-)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -40,7 +40,7 @@
 ;;;construtor que nao recebe qualquer argumento e devolve um novo tabuleiro vazio 
 (defun cria-tabuleiro ()
   (make-array '(18 10))
-)
+  )
 
 ;;;COPIA-TABULEIRO
 ;;;construtor que recebe um <tabuleiro> e devolve um novo tabuleiro com o mesmo
@@ -57,7 +57,7 @@
       )
     new-tabuleiro
     )
-)
+  )
 
 ;;;TABULEIRO-PREENCHIDO-P
 ;;;seletor que recebe um <tabuleiro>, um inteiro <l> que equivale ao numero da linha
@@ -65,7 +65,7 @@
 ;;;se essa posicao estiver preenchida, falso caso contrario 
 (defun tabuleiro-preenchido-p (tabuleiro l c)
   (aref tabuleiro l c)
-)
+  )
 
 ;;;TABULEIRO-ALTURA-COLUNA
 ;;;seletor recebe um <tabuleiro>, um inteiro <c> correspondete ao numero de uma coluna
@@ -79,8 +79,8 @@
       )
     0
     )
-)
-  
+  )
+
 ;;;TABULEIRO-LINHA-COMPLETA-P
 ;;;reconhecedor recebe um <tabuleiro>, um inteiro que equivale ao numero de uma
 ;;;linha <l> e devolve o valor logico verdade se todas as posicoes da linha 
@@ -92,7 +92,7 @@
       )
     )
   t
-)
+  )
 
 ;;;TABULEIRO-PREENCHE!
 ;;;modificador recebe um <tabuleiro>, um inteiro <l> que equivale ao numero
@@ -102,10 +102,10 @@
 (defun tabuleiro-preenche! (tabuleiro l c)
   (if (and (< l (car (array-dimensions tabuleiro))) (>= l 0))
       (if (and (< c (cadr (array-dimensions tabuleiro))) (>= c 0))
-  (setf (aref tabuleiro l c) T)
+          (setf (aref tabuleiro l c) T)
         )
     )
-)
+  )
 
 ;;;TABULEIRO-REMOVE-LINHA!
 ;;;modificador que recebe um <tabuleiro>, um inteiro <l> correspondente ao
@@ -123,7 +123,7 @@
           )
         )
     )
-)
+  )
 
 ;;;TABULEIRO-TOPO-PREENCHIDO-P
 ;;;reconhecedor recebe um <tabuleiro>, e devolve o valor logico verdade se
@@ -136,7 +136,7 @@
       )
     )
   nil
-)
+  )
 
 ;;;TABULEIROS-IGUAIS-P
 ;;;teste recebe dois tabuleiros <t1> e <t2>, e devolve o valor logico verdade se
@@ -147,17 +147,17 @@
         )
     (if (or (not (equalp l (1- (car (array-dimensions t2))))) (not (equalp c (1- (cadr (array-dimensions t1))))))
         (return-from tabuleiros-iguais-p nil) 
-          )
+      )
     (dotimes (i l)
       (dotimes (j c)
         (if (not (equalp (aref t1 i j) (aref t2 i j)))
-           (return-from tabuleiros-iguais-p nil)
+            (return-from tabuleiros-iguais-p nil)
           )
         )
       )
     t
     )
-)
+  )
 
 ;;;TABULEIRO->ARRAY
 ;;;transformador de saida recebe um <tabuleiro> e devolve um novo array, que para
@@ -165,14 +165,14 @@
 ;;;do tabuleiro
 (defun tabuleiro->array (tabuleiro)
   tabuleiro
-)
+  )
 
 ;;;ARRAY->TABULEIRO
 ;;;transformador de entrada recebe um <array> cujas posicoes logicas tem o valor
 ;;;logico T ou Nil, e constroi um novo tabuleiro com o conteudo do array recebido
 (defun array->tabuleiro (array)
   array
-)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -196,14 +196,14 @@
                :pecas-colocadas (copy-list (estado-pecas-colocadas estado))
                :tabuleiro (copia-tabuleiro (estado-tabuleiro estado))
                )
-)
+  )
 
 ;;;ESTADOS-IGUAIS-P
 ;;;teste que recebe dois estados <estado1> e <estado2> , devolvendo o valor logico
 ;;;verdade se os dois estados forem iguais e falso caso contrario
 (defun estados-iguais-p (estado1 estado2)
   (equalp estado1 estado2)
-)
+  )
 
 ;;;ESTADO-FINAL-P
 ;;;reconhecedor recebe um <estado> e devolve o valor logico verdade se corresponder a 
@@ -214,7 +214,7 @@
       T
     NIL
     )
-)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -238,9 +238,9 @@
 ;;;corresponder a uma solucao, e falso caso contrario
 (defun solucao (estado)
   (if (and (not(car(estado-pecas-por-colocar estado))) (not(tabuleiro-topo-preenchido-p (estado-tabuleiro estado))))
-    t
+      t
     )
-)
+  )
 
 ;;;ACCOES
 ;;;funcao recebe um <estado> e devolve uma lista de accoes correspondendo a todas as
@@ -260,28 +260,51 @@
     (dolist(peca validos) 
       (dotimes (i (- c (1- (cadr (array-dimensions peca)))))
         (setf resposta (append resposta (list (cria-accao i peca))))
+        )
       )
-    )
     resposta
+    )
   )
- )
 ;;;RESULTADO
 ;;;funcao recebe um <estado> e uma <accao>, e devolve um novo estado que resulta de
 ;;;aplicar a accao recebida ao estado original
 ;(defun resultado (estado accao)
-
-;)
+;  (let ((estado2 (copia-estado estado))
+;        (l 0))
+;    (setf (estado-pecas-colocadas estado2) (append (car (estado-pecas-por-colocar estado2)) (estado-pecas-colocadas estado2)))
+;    (setf (estado-pecas-por-colocar estado2) (cdr (estado-pecas-por-colocar estado2)))
+;    (dotimes i (cadr (array-dimensions (cadr accao)))
+;      (if (< l (tabuleiro-altura-coluna (estado-tabuleiro estado2) (+ (car accao) i)))
+;          (setf l (tabuleiro-altura-coluna (estado-tabuleiro estado2) (+ (car accao) i)))
+;        )
+;      )
+;    (dotimes i (cadr (array-dimensions (cadr accao)))
+;      )
+;    )
+;  )
 
 ;;;QUALIDADE
 ;;;funcao que recebe um <estado> e retorna um valor de qualidade que corresponde ao
 ;;;valor negativo dos pontos ganhos ate ao momento
 (defun qualidade (estado)
   (* (estado-pontos estado) -1)
-)
+  )
 
-;;;CUSTO-OPURTUNIDADE
-;;;funcao que recebe um <estado> e devolve o custo de opurtunidade de todas as accoes 
+;;;CUSTO-OPORTUNIDADE
+;;;funcao que recebe um <estado> e devolve o custo de oportunidade de todas as accoes 
 ;;;realizadas ate ao momento
-;(defun custo-opurtunidade (estado)
-
-;)
+(defun custo-oportunidade (estado)
+  (let ((resposta 0))
+    (dolist(peca (estado-pecas-colocadas estado)) 
+      (cond ((equalp 'i (car (estado-pecas-colocadas estado))) (setf resposta (+ resposta 800)))
+            ((equalp 'j (car (estado-pecas-colocadas estado))) (setf resposta (+ resposta 500)))
+            ((equalp 'l (car (estado-pecas-colocadas estado))) (setf resposta (+ resposta 500)))
+            ((equalp 'o (car (estado-pecas-colocadas estado))) (setf resposta (+ resposta 300)))
+            ((equalp 's (car (estado-pecas-colocadas estado))) (setf resposta (+ resposta 300)))
+            ((equalp 'z (car (estado-pecas-colocadas estado))) (setf resposta (+ resposta 300)))
+            ((equalp 't (car (estado-pecas-colocadas estado))) (setf resposta (+ resposta 300)))
+            )
+      )
+    (- resposta (estado-pontos estado))
+    )
+  )
