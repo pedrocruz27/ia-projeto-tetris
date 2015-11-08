@@ -48,7 +48,7 @@
 (defun copia-tabuleiro (tabuleiro)
   (let ((new-tabuleiro (cria-tabuleiro))
         (c (1- (cadr (array-dimensions tabuleiro))))
-        (l (1- (first (array-dimensions tabuleiro))))
+        (l (1- (car (array-dimensions tabuleiro))))
         )
     (dotimes (ic c) 
       (dotimes (il l)
@@ -71,7 +71,7 @@
 ;;;seletor recebe um <tabuleiro>, um inteiro <c> correspondete ao numero de uma coluna
 ;;;e devolve a altura da coluna, ou seja, a posicao mais alta preenchida dessa coluna
 (defun tabuleiro-altura-coluna (tabuleiro c)
-  (let ((l (first (array-dimensions tabuleiro))))
+  (let ((l (car (array-dimensions tabuleiro))))
     (dotimes (i l) 
       (if (tabuleiro-preenchido-p tabuleiro  (1- (- l  i)) c)
           (return-from tabuleiro-altura-coluna  (- l  i))
@@ -86,9 +86,9 @@
 ;;;linha <l> e devolve o valor logico verdade se todas as posicoes da linha 
 ;;;recebida estiverem preenchidas, e falso caso contrario 
 (defun tabuleiro-linha-completa-p (tabuleiro l)
-  (let ((c (1-(cadr (array-dimensions tabuleiro)))))
+  (let ((c (1- (cadr (array-dimensions tabuleiro)))))
     (dotimes (i c) 
-      (cond ((not(tabuleiro-preenchido-p tabuleiro l  i)) (return-from tabuleiro-linha-completa-p nil)))
+      (cond ((not (tabuleiro-preenchido-p tabuleiro l  i)) (return-from tabuleiro-linha-completa-p nil)))
       )
     )
   t
@@ -130,7 +130,7 @@
 ;;;existir alguma posicao na linha do topo do tabuleiro que esteja preenchida,
 ;;;e falso caso contrario
 (defun tabuleiro-topo-preenchido-p (tabuleiro)
-  (let ((c (1-(cadr (array-dimensions tabuleiro)))))
+  (let ((c (1- (cadr (array-dimensions tabuleiro)))))
     (dotimes (i c) 
       (cond ((tabuleiro-preenchido-p tabuleiro 17  i) (return-from tabuleiro-topo-preenchido-p t)))
       )
@@ -210,7 +210,7 @@
 ;;;um estado final onde o jogador ja nao possa fazer mais jogadas e falso caso
 ;;;contrario
 (defun estado-final-p (estado)
-  (if (or (not(car(estado-pecas-por-colocar estado))) (tabuleiro-topo-preenchido-p (estado-tabuleiro estado)))
+  (if (or (not (car (estado-pecas-por-colocar estado))) (tabuleiro-topo-preenchido-p (estado-tabuleiro estado)))
       T
     NIL
     )
@@ -218,7 +218,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
-;;----------------------------- Problema ---------------------------------------
+;------------------------------ Problema ---------------------------------------
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -237,7 +237,7 @@
 ;;;funcao recebe um <estado> e devolve o valor logico verdade se o estado recebido
 ;;;corresponder a uma solucao, e falso caso contrario
 (defun solucao (estado)
-  (if (and (not(car(estado-pecas-por-colocar estado))) (not(tabuleiro-topo-preenchido-p (estado-tabuleiro estado))))
+  (if (and (not (car (estado-pecas-por-colocar estado))) (not (tabuleiro-topo-preenchido-p (estado-tabuleiro estado))))
       t
     )
   )
@@ -275,7 +275,7 @@
         (l (car (array-dimensions (cdr accao))))
         (c (cadr (array-dimensions (cdr accao))))
         (linhas-removidas 0))
-    (setf (estado-pecas-colocadas estado2) (append (list(car (estado-pecas-por-colocar estado2))) (estado-pecas-colocadas estado2)))
+    (setf (estado-pecas-colocadas estado2) (append (list (car (estado-pecas-por-colocar estado2))) (estado-pecas-colocadas estado2)))
     (setf (estado-pecas-por-colocar estado2) (cdr (estado-pecas-por-colocar estado2)))
     (dotimes (i l)
       (if (< altura (tabuleiro-altura-coluna (estado-tabuleiro estado2) (+ (car accao) i)))
@@ -302,10 +302,10 @@
         )
       )
     (cond ((equalp linhas-removidas 1) (setf (estado-pontos estado2) (+ (estado-pontos estado2) 100)))
-            ((equalp linhas-removidas 2) (setf (estado-pontos estado2) (+ (estado-pontos estado2) 300)))
-            ((equalp linhas-removidas 3) (setf (estado-pontos estado2) (+ (estado-pontos estado2) 500)))
-            ((equalp linhas-removidas 4) (setf (estado-pontos estado2) (+ (estado-pontos estado2) 800)))
-            )
+          ((equalp linhas-removidas 2) (setf (estado-pontos estado2) (+ (estado-pontos estado2) 300)))
+          ((equalp linhas-removidas 3) (setf (estado-pontos estado2) (+ (estado-pontos estado2) 500)))
+          ((equalp linhas-removidas 4) (setf (estado-pontos estado2) (+ (estado-pontos estado2) 800)))
+          )
     estado2
     )
   )
@@ -335,3 +335,9 @@
     (- resposta (estado-pontos estado))
     )
   )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;------------------------------ FIM --------------------------------------------
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
