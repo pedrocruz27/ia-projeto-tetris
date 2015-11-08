@@ -265,6 +265,7 @@
     resposta
     )
   )
+
 ;;;RESULTADO
 ;;;funcao recebe um <estado> e uma <accao>, e devolve um novo estado que resulta de
 ;;;aplicar a accao recebida ao estado original
@@ -294,14 +295,21 @@
         (if (tabuleiro-linha-completa-p (estado-tabuleiro estado2) i)
             (progn
               (tabuleiro-remove-linha! (estado-tabuleiro estado2) i)
-              (1+ linhas-removidas)
+              (setf linhas-removidas (1+ linhas-removidas))
+              (setf i (1- i))
               )
           )
         )
       )
+    (cond ((equalp linhas-removidas 1) (setf (estado-pontos estado2) (+ (estado-pontos estado2) 100)))
+            ((equalp linhas-removidas 2) (setf (estado-pontos estado2) (+ (estado-pontos estado2) 300)))
+            ((equalp linhas-removidas 3) (setf (estado-pontos estado2) (+ (estado-pontos estado2) 500)))
+            ((equalp linhas-removidas 4) (setf (estado-pontos estado2) (+ (estado-pontos estado2) 800)))
+            )
     estado2
     )
   )
+
 ;;;QUALIDADE
 ;;;funcao que recebe um <estado> e retorna um valor de qualidade que corresponde ao
 ;;;valor negativo dos pontos ganhos ate ao momento
