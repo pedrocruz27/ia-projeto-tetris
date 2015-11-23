@@ -1,6 +1,6 @@
 ;;; GRUPO: 21 || ALUNOS: Henrique Lourenco - 77459 / Jose Touret - 78215 / Pedro Cruz - 78579 
 
-(load "utils.fas")
+;(load "utils.fas")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -272,16 +272,26 @@
 (defun resultado (estado accao)
   (let ((estado2 (copia-estado estado))
         (altura 0)
+        (altura-peca 0)
         (l (car (array-dimensions (cdr accao))))
         (c (cadr (array-dimensions (cdr accao))))
         (linhas-removidas 0))
     (setf (estado-pecas-colocadas estado2) (append (list (car (estado-pecas-por-colocar estado2))) (estado-pecas-colocadas estado2)))
     (setf (estado-pecas-por-colocar estado2) (cdr (estado-pecas-por-colocar estado2)))
+
     (dotimes (i l)
-      (if (< altura (tabuleiro-altura-coluna (estado-tabuleiro estado2) (+ (car accao) i)))
-          (setf altura (tabuleiro-altura-coluna (estado-tabuleiro estado2) (+ (car accao) i)))
+      (setf altura-peca 0)
+      (dotimes (j c)
+        (if (not (aref (accao-peca accao)  i j))
+            (return)
+          (decf altura-peca)
+          )
+        )
+        (if (< altura (+ (tabuleiro-altura-coluna (estado-tabuleiro estado2) (+ (car accao) i)) altura-peca))
+          (setf altura (+ (tabuleiro-altura-coluna (estado-tabuleiro estado2) (+ (car accao) i)) altura-peca))
         )
       )
+
     (dotimes (i l)
       (dotimes (j c)
         (if (aref (cdr accao)  i j)
