@@ -279,10 +279,10 @@
     (setf (estado-pecas-colocadas estado2) (append (list (car (estado-pecas-por-colocar estado2))) (estado-pecas-colocadas estado2)))
     (setf (estado-pecas-por-colocar estado2) (cdr (estado-pecas-por-colocar estado2)))
 
-    (dotimes (i l)
+    (dotimes (i c)
       (setf altura-peca 0)
-      (dotimes (j c)
-        (if (not (aref (accao-peca accao)  i j))
+      (dotimes (j l)
+        (if (aref (accao-peca accao)  j i)
             (return)
           (decf altura-peca)
           )
