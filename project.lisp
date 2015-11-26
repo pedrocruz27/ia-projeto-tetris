@@ -346,6 +346,21 @@
     )
   )
 
+
+(defun procura-pp (problema)
+  (let ((x nil))
+    (if (problema-solucao (problema-estado estado))
+        T
+      (dolist (problema-accao problema)
+        (setf x (procura-pp (problema-resultado (problema-estado problema) accao)))
+        (if (not (null x))
+            x
+            )
+        )
+      )
+    )
+  )
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;------------------------------ FIM --------------------------------------------
