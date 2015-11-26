@@ -347,20 +347,23 @@
   )
 
 
+
 (defun procura-pp (problema)
-  (let ((x nil))
-    (if (solucao (problema-estado-inicial problema))
-        nil
-      (dolist (accao problema)
-        (setf x (procura-pp (resultado (problema-estado-inicial problema) accao)))
-        (if (null x)
-            x
-          )
+  (let ((solucao nil)
+        (nextnode problema))
+    (if (funcall (problema-solucao problema) (problema-estado-inicial problema))
+        (return-from procura-pp t)
+      (dolist (accao (nreverse (funcall (problema-accoes problema) (problema-estado-inicial problema))))
+        (setf (problema-estado-inicial nextnode) (funcall (problema-resultado problema) (problema-estado-inicial problema) accao))
+        (setf solucao (procura-pp nextnode))
+        (cond ((null solucao) nil)
+              ((equal t solucao) (return-from procura-pp (list accao)))
+              (t (return-from procura-pp (append (list accao) solucao)))
+              )
         )
       )
     )
   )
-
 ;(load "utils.fas")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
