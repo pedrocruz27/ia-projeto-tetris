@@ -1,0 +1,4 @@
+;;; Teste 23 E2
+;;; procura A* num problema alternativo ao jogo do tetris, a implementacao da procura-A* deve ser independente do problema de procura
+;;deve retornar uma lista de accoes (ver ficheiro output)
+(RIGHT RIGHT UP UP UP)

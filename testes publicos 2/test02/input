@@ -1,0 +1,34 @@
+;;; Teste 02 E2- correspondente ao Teste 5 da Entrega 1
+;;; Testes tipo tabuleiro 2
+;;deve retornar IGNORE
+(ignore-value (setf tab1 (cria-tabuleiro)))
+;;deve retornar IGNORE
+(ignore-value (dotimes (coluna 10)(tabuleiro-preenche! tab1 2 coluna)))
+;;deve retornar IGNORE
+(ignore-value (tabuleiro-preenche! tab1 0 0))
+;;deve retornar IGNORE
+(ignore-value (tabuleiro-preenche! tab1 3 3))
+;;deve retornar 3
+(tabuleiro-altura-coluna tab1 0)
+;;deve retornar 4
+(tabuleiro-altura-coluna tab1 3)
+;;deve retornar T
+(tabuleiro-preenchido-p tab1 0 0)
+;;deve retornar T
+(tabuleiro-preenchido-p tab1 3 3)
+;;deve retornar IGNORE
+(ignore-value (tabuleiro-remove-linha! tab1 2))
+;;deve retornar T
+(tabuleiro-preenchido-p tab1 0 0)
+;;deve retornar NIL
+(tabuleiro-preenchido-p tab1 0 1)
+;;deve retornar NIL
+(tabuleiro-preenchido-p tab1 3 3)
+;;deve retornar T
+(tabuleiro-preenchido-p tab1 2 3)
+;;deve retornar NIL
+(tabuleiro-preenchido-p tab1 2 2)
+;;deve retornar NIL
+(tabuleiro-preenchido-p tab1 1 2)
+;;deve retornar 3
+(tabuleiro-altura-coluna tab1 3)

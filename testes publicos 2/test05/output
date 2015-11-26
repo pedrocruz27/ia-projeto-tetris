@@ -1,0 +1,22 @@
+;;; teste 05 E2 - correspondente ao Teste 10 da Entrega 1
+;;; Testes tipo estado 4
+;;deve retornar T
+T
+;;deve retornar NIL
+NIL
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar T
+T
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar NIL
+NIL

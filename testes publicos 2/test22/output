@@ -1,0 +1,8 @@
+;;; Teste 22 E2
+;;; procura A* num tabuleiro quase cheio usando custo oportunidade
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar uma lista de accoes (ver ficheiro output)
+((7 . #2A((NIL T) (NIL T) (T T))) (7 . #2A((NIL NIL T) (T T T))))

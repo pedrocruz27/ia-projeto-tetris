@@ -1,0 +1,4 @@
+;;; Teste 23 E2
+;;; procura A* num problema alternativo ao jogo do tetris, a implementacao da procura-A* deve ser independente do problema de procura
+;;deve retornar uma lista de accoes (ver ficheiro output)
+(procura-A* (make-problema :estado-inicial (list 0 0 0) :accoes #'(lambda (e) (list 'up 'down 'left 'right)) :resultado #'(lambda (e a) (cond ((eq a 'up) (list (first e) (1+ (second e)) (1+ (third e))))((eq a 'down) (list (first e) (1- (second e)) (1+ (third e))))((eq a 'left) (list (1- (first e)) (second e) (1+ (third e))))(T (list (1+ (first e)) (second e) (1+ (third e)))))) :custo-caminho #'(lambda (e) (third e)) :solucao #'(lambda (e) (and (= (first e) 2)(= (second e) 3)))) #'(lambda (e) (+ (abs (- 2 (first e))) (abs (- 3 (second e))))))

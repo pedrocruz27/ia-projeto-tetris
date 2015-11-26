@@ -1,0 +1,8 @@
+;;; Teste 19 E2 
+;;; procura A* num tabuleiro onde e possivel fazer 4 linhas com qualidade.
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar uma lista de accoes (ver ficheiro output)
+((8 . #2A((NIL T) (NIL T) (T T))) (8 . #2A((T NIL) (T NIL) (T T))))

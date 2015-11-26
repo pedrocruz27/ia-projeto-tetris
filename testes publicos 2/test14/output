@@ -1,0 +1,11 @@
+;;; Teste 14 E2 
+;;; procura profundidade primeiro num tabuleiro com algumas pecas
+;;deve retornar IGNORE
+IGNORE
+IGNORE
+;;deve retornar uma lista de accoes (ver ficheiro output)
+((8 . #2A((T T) (T T))) (8 . #2A((T T) (T T))) (8 . #2A((T T) (T T)))
+ (8 . #2A((T T) (T T))) (8 . #2A((T T) (T T))) (7 . #2A((T T T) (NIL NIL T)))
+ (7 . #2A((T T T) (NIL NIL T))) (5 . #2A((NIL T) (T T) (NIL T)))
+ (5 . #2A((NIL T) (T T) (NIL T))) (4 . #2A((NIL NIL T) (T T T)))
+ (4 . #2A((NIL NIL T) (T T T))) (5 . #2A((T T T T))) (1 . #2A((T T T T))))

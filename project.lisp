@@ -1,7 +1,5 @@
 ;;; GRUPO: 21 || ALUNOS: Henrique Lourenco - 77459 / Jose Touret - 78215 / Pedro Cruz - 78579 
 
-;(load "utils.fas")
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;-------------------------------- Accao ----------------------------------------
@@ -246,26 +244,28 @@
 ;;;funcao recebe um <estado> e devolve uma lista de accoes correspondendo a todas as
 ;;;accoes validas que podem ser feitas com a proxima peca a ser colocada
 (defun accoes (estado)
-  (let ((c (cadr (array-dimensions (estado-tabuleiro estado))))
-        (validos nil)
-        (resposta ()))
-    (cond ((equalp 'i (car (estado-pecas-por-colocar estado))) (setf validos (list peca-i0 peca-i1)))
-          ((equalp 'j (car (estado-pecas-por-colocar estado))) (setf validos (list peca-j0 peca-j1 peca-j2 peca-j3)))
-          ((equalp 'l (car (estado-pecas-por-colocar estado))) (setf validos (list peca-l0 peca-l1 peca-l2 peca-l3)))
-          ((equalp 'o (car (estado-pecas-por-colocar estado))) (setf validos (list peca-o0)))
-          ((equalp 's (car (estado-pecas-por-colocar estado))) (setf validos (list peca-s0 peca-s1)))
-          ((equalp 'z (car (estado-pecas-por-colocar estado))) (setf validos (list peca-z0 peca-z1)))
-          ((equalp 't (car (estado-pecas-por-colocar estado))) (setf validos (list peca-t0 peca-t1 peca-t2 peca-t3)))
+  (if (tabuleiro-topo-preenchido-p (estado-tabuleiro estado))
+      nil
+    (let ((c (cadr (array-dimensions (estado-tabuleiro estado))))
+          (validos nil)
+          (resposta ()))
+      (cond ((equalp 'i (car (estado-pecas-por-colocar estado))) (setf validos (list peca-i0 peca-i1)))
+            ((equalp 'j (car (estado-pecas-por-colocar estado))) (setf validos (list peca-j0 peca-j1 peca-j2 peca-j3)))
+            ((equalp 'l (car (estado-pecas-por-colocar estado))) (setf validos (list peca-l0 peca-l1 peca-l2 peca-l3)))
+            ((equalp 'o (car (estado-pecas-por-colocar estado))) (setf validos (list peca-o0)))
+            ((equalp 's (car (estado-pecas-por-colocar estado))) (setf validos (list peca-s0 peca-s1)))
+            ((equalp 'z (car (estado-pecas-por-colocar estado))) (setf validos (list peca-z0 peca-z1)))
+            ((equalp 't (car (estado-pecas-por-colocar estado))) (setf validos (list peca-t0 peca-t1 peca-t2 peca-t3)))
+            )
+      (dolist(peca validos) 
+        (dotimes (i (- c (1- (cadr (array-dimensions peca)))))
+          (setf resposta (append resposta (list (cria-accao i peca))))
           )
-    (dolist(peca validos) 
-      (dotimes (i (- c (1- (cadr (array-dimensions peca)))))
-        (setf resposta (append resposta (list (cria-accao i peca))))
         )
+      resposta
       )
-    resposta
     )
   )
-
 ;;;RESULTADO
 ;;;funcao recebe um <estado> e uma <accao>, e devolve um novo estado que resulta de
 ;;;aplicar a accao recebida ao estado original
@@ -349,17 +349,19 @@
 
 (defun procura-pp (problema)
   (let ((x nil))
-    (if (problema-solucao (problema-estado estado))
-        T
-      (dolist (problema-accao problema)
-        (setf x (procura-pp (problema-resultado (problema-estado problema) accao)))
-        (if (not (null x))
+    (if (solucao (problema-estado-inicial problema))
+        nil
+      (dolist (accao problema)
+        (setf x (procura-pp (resultado (problema-estado-inicial problema) accao)))
+        (if (null x)
             x
-            )
+          )
         )
       )
     )
   )
+
+;(load "utils.fas")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;

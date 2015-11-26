@@ -1,0 +1,18 @@
+;;; Teste 10 E2 - correspondente ao Teste 17 da entrega 1
+;;; Testes fn custo-oportunidade
+;;deve retornar 700
+700
+;;deve retornar 400
+400
+;;deve retornar 400
+400
+;;deve retornar 200
+200
+;;deve retornar 200
+200
+;;deve retornar 200
+200
+;;deve retornar 200
+200
+;;deve retornar 850
+850

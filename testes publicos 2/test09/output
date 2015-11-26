@@ -1,0 +1,20 @@
+;;; Teste 09 E2 - correspondente ao Teste 15 da Entrega 1
+;;; Testes fn resultado
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar T
+T
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar 300
+300
+;;deve retornar NIL
+NIL

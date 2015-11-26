@@ -1,0 +1,34 @@
+;;; Teste 02 E2- correspondente ao Teste 5 da Entrega 1
+;;; Testes tipo tabuleiro 2
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar 3
+3
+;;deve retornar 4
+4
+;;deve retornar T
+T
+;;deve retornar T
+T
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar T
+T
+;;deve retornar NIL
+NIL
+;;deve retornar NIL
+NIL
+;;deve retornar T
+T
+;;deve retornar NIL
+NIL
+;;deve retornar NIL
+NIL
+;;deve retornar 3
+3

@@ -1,0 +1,30 @@
+;;; Teste 12 E2 
+;;; Testes funcao accoes em que o estado nao tem mais pecas por colocar ou esta cheio
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar NIL
+NIL
+;;deve retornar uma lista de accoes para a peca l (ver ficheiro output)
+((0 . #2A((T T) (T NIL) (T NIL))) (1 . #2A((T T) (T NIL) (T NIL)))
+ (2 . #2A((T T) (T NIL) (T NIL))) (3 . #2A((T T) (T NIL) (T NIL)))
+ (4 . #2A((T T) (T NIL) (T NIL))) (5 . #2A((T T) (T NIL) (T NIL)))
+ (6 . #2A((T T) (T NIL) (T NIL))) (7 . #2A((T T) (T NIL) (T NIL)))
+ (8 . #2A((T T) (T NIL) (T NIL))) (0 . #2A((T NIL NIL) (T T T)))
+ (1 . #2A((T NIL NIL) (T T T))) (2 . #2A((T NIL NIL) (T T T)))
+ (3 . #2A((T NIL NIL) (T T T))) (4 . #2A((T NIL NIL) (T T T)))
+ (5 . #2A((T NIL NIL) (T T T))) (6 . #2A((T NIL NIL) (T T T)))
+ (7 . #2A((T NIL NIL) (T T T))) (0 . #2A((NIL T) (NIL T) (T T)))
+ (1 . #2A((NIL T) (NIL T) (T T))) (2 . #2A((NIL T) (NIL T) (T T)))
+ (3 . #2A((NIL T) (NIL T) (T T))) (4 . #2A((NIL T) (NIL T) (T T)))
+ (5 . #2A((NIL T) (NIL T) (T T))) (6 . #2A((NIL T) (NIL T) (T T)))
+ (7 . #2A((NIL T) (NIL T) (T T))) (8 . #2A((NIL T) (NIL T) (T T)))
+ (0 . #2A((T T T) (NIL NIL T))) (1 . #2A((T T T) (NIL NIL T)))
+ (2 . #2A((T T T) (NIL NIL T))) (3 . #2A((T T T) (NIL NIL T)))
+ (4 . #2A((T T T) (NIL NIL T))) (5 . #2A((T T T) (NIL NIL T)))
+ (6 . #2A((T T T) (NIL NIL T))) (7 . #2A((T T T) (NIL NIL T))))
+;;deve retornar IGNORE
+IGNORE
+;;deve retornar NIL
+NIL
+;;deve retornar NIL
+NIL

@@ -1,0 +1,14 @@
+;;; Teste 12 E2 
+;;; Testes funcao accoes em que o estado nao tem mais pecas por colocar ou esta cheio
+;;deve retornar IGNORE
+(ignore-value (setf t1 (cria-tabuleiro)))
+;;deve retornar NIL
+(accoes (make-estado :pontos 0 :pecas-por-colocar '() :pecas-colocadas '() :tabuleiro t1))
+;;deve retornar uma lista de accoes para a peca l (ver ficheiro output)
+(accoes (make-estado :pontos 0 :pecas-por-colocar '(l i j) :pecas-colocadas '() :tabuleiro t1))
+;;deve retornar IGNORE
+(ignore-value (dotimes (linha 18)(tabuleiro-preenche! t1 linha 0)))
+;;deve retornar NIL
+(accoes (make-estado :pontos 0 :pecas-por-colocar '(o t j) :pecas-colocadas '(i i i i) :tabuleiro t1))
+;;deve retornar NIL
+(accoes (make-estado :pontos 0 :pecas-por-colocar '(t l t) :pecas-colocadas '(i i i i) :tabuleiro t1))

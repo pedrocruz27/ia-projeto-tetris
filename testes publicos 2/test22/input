@@ -1,0 +1,8 @@
+;;; Teste 22 E2
+;;; procura A* num tabuleiro quase cheio usando custo oportunidade
+;;deve retornar IGNORE
+(ignore-value (setf t1 (cria-tabuleiro)))
+;;deve retornar IGNORE
+(ignore-value (dotimes (linha 16) (dotimes (coluna 7) (tabuleiro-preenche! t1 linha coluna))))
+;;deve retornar uma lista de accoes (ver ficheiro output)
+(procura-A* (make-problema :estado-inicial (make-estado :pontos 0 :tabuleiro t1 :pecas-colocadas () :pecas-por-colocar '(l j)) :solucao #'solucao :accoes #'accoes :resultado #'resultado :custo-caminho #'custo-oportunidade) #'(lambda (x) 0))
