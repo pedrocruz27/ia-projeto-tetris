@@ -45,8 +45,8 @@
 ;;;conteudo do tabuleiro recebido
 (defun copia-tabuleiro (tabuleiro)
   (let ((new-tabuleiro (cria-tabuleiro))
-        (c (1- (cadr (array-dimensions tabuleiro))))
-        (l (1- (car (array-dimensions tabuleiro))))
+        (c (cadr (array-dimensions tabuleiro)))
+        (l (car (array-dimensions tabuleiro)))
         )
     (dotimes (ic c) 
       (dotimes (il l)
@@ -128,7 +128,7 @@
 ;;;existir alguma posicao na linha do topo do tabuleiro que esteja preenchida,
 ;;;e falso caso contrario
 (defun tabuleiro-topo-preenchido-p (tabuleiro)
-  (let ((c (1- (cadr (array-dimensions tabuleiro)))))
+  (let ((c (cadr (array-dimensions tabuleiro))))
     (dotimes (i c) 
       (cond ((tabuleiro-preenchido-p tabuleiro 17  i) (return-from tabuleiro-topo-preenchido-p t)))
       )
@@ -140,10 +140,10 @@
 ;;;teste recebe dois tabuleiros <t1> e <t2>, e devolve o valor logico verdade se
 ;;;os dois tabuleiros forem iguais, e falso caso contrario
 (defun tabuleiros-iguais-p (t1 t2)
-  (let ((l (1- (car (array-dimensions t1))))
-        (c (1- (cadr (array-dimensions t1))))
+  (let ((l (car (array-dimensions t1)))
+        (c (cadr (array-dimensions t1)))
         )
-    (if (or (not (equalp l (1- (car (array-dimensions t2))))) (not (equalp c (1- (cadr (array-dimensions t1))))))
+    (if (or (not (equalp l (car (array-dimensions t2)))) (not (equalp c (cadr (array-dimensions t1)))))
         (return-from tabuleiros-iguais-p nil) 
       )
     (dotimes (i l)
@@ -346,24 +346,20 @@
     )
   )
 
-
-
 (defun procura-pp (problema)
-  (let ((solucao nil)
-        (nextnode problema))
-    (if (funcall (problema-solucao problema) (problema-estado-inicial problema))
-        (return-from procura-pp t)
-      (dolist (accao (nreverse (funcall (problema-accoes problema) (problema-estado-inicial problema))))
-        (setf (problema-estado-inicial nextnode) (funcall (problema-resultado problema) (problema-estado-inicial problema) accao))
-        (setf solucao (procura-pp nextnode))
-        (cond ((null solucao) nil)
-              ((equal t solucao) (return-from procura-pp (list accao)))
-              (t (return-from procura-pp (append (list accao) solucao)))
-              )
+  (if (solucao (problema-estado-inicial problema))
+      (return-from procura-pp t)
+    (dolist (accao (accoes (problema-estado-inicial problema)))
+      (if (solucao (resultado (problema-estado-inicial problema) accao)
+        (return-from procura-pp accao)
         )
+      (procura-pp (resultado (problema-estado-inicial problema) accao))
       )
     )
   )
+
+
+
 ;(load "utils.fas")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
