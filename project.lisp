@@ -227,7 +227,7 @@
 ;;;         estado recebido
 ;;;<resultado> - funcao que devolve o estado sucessor que resulta de executar a accao
 ;;;         recebida no estado recebido
-;;;<custo> - caminho - funcao que devolve o custo do caminho desde o estado incicial
+;;;<custo-caminho> - funcao que devolve o custo do caminho desde o estado incicial
 ;;;        ate um estado recebido      
 (defstruct problema estado-inicial solucao accoes resultado custo-caminho)
 
@@ -346,6 +346,7 @@
     )
   )
 
+
 (defun procura-pp (problema)
   (let ((solution nil)
         (nextnode nil))
@@ -353,10 +354,10 @@
         (return-from procura-pp t)
       (dolist (accao (nreverse (funcall (problema-accoes problema) (problema-estado-inicial problema))))
         (setf nextnode (make-problema :estado-inicial (funcall (problema-resultado problema) (problema-estado-inicial problema) accao)
-              :solucao (problema-solucao problema)
-              :accoes (problema-accoes problema)
-              :resultado (problema-resultado problema)
-              :custo-caminho (problema-custo-caminho problema)))
+                                      :solucao (problema-solucao problema)
+                                      :accoes (problema-accoes problema)
+                                      :resultado (problema-resultado problema)
+                                      :custo-caminho (problema-custo-caminho problema)))
         (setf solution (procura-pp nextnode))                                      
         (if (not(null solution))
             (if (equal t solution) 
@@ -368,6 +369,26 @@
     )
   )
 
+
+(defun procura-A* (problema heuristica)
+  (let ((fronteira (list (cons (problema-estado-inicial problema) (+ (funcall (problema-custo-caminho problema) (problema-estado-inicial problema)) (funcall heuristica (problema-estado-inicial problema)))))))
+    (let ((estadoActual (caar fronteira))
+          (proximoEstado nil))
+      (loop (when (not (funcall (problema-solucao problema) estadoActual))
+              (if (funcall (problema-solucao problema) estadoActual)
+                  (return-from procura-A* "caminho ate a solucao")
+                (dolist (accao (funcall (problema-accoes problema) estadoActual))
+                  (setf proximoEstado (funcall (problema-resultado problema) estadoActual accao))
+                  (setf fronteira (append fronteira (list (cons proximoEstado (+ (funcall (problema-custo-caminho problema) proximoEstado) (funcall heuristica proximoEstado))))))
+                  (setf fronteira (cdr fronteira))
+                  (setf estadoActual (caar fronteira))
+                  )
+                )
+              )
+            )
+      )
+    )
+  )
 
 ;(load "utils.fas")
 
