@@ -371,24 +371,31 @@
 
 
 (defun procura-A* (problema heuristica)
-  (let ((fronteira (list (cons (problema-estado-inicial problema) (+ (funcall (problema-custo-caminho problema) (problema-estado-inicial problema)) (funcall heuristica (problema-estado-inicial problema)))))))
-    (let ((estadoActual (caar fronteira))
-          (proximoEstado nil)
-          (fechados nil))
-      (when (not (funcall (problema-solucao problema) estadoActual))
-        
-        (dolist (accao (funcall (problema-accoes problema) estadoActual))
-          (setf proximoEstado (funcall (problema-resultado problema) estadoActual accao))
-          (setf fronteira (append fronteira (list (cons proximoEstado (+ (funcall (problema-custo-caminho problema) proximoEstado) (funcall heuristica proximoEstado))))))
+  (let ((fronteira (list (list (problema-estado-inicial problema) (list nil) (+ (funcall (problema-custo-caminho problema) (problema-estado-inicial problema)) (funcall heuristica (problema-estado-inicial problema)))))))
+    (let ((noduloActual (car fronteira))
+          (proximoEstado nil))
+      (loop while (not (funcall (problema-solucao problema) (car noduloActual))) do
+        (dolist (accao (funcall (problema-accoes problema) (car noduloActual)))
+          (setf proximoEstado (funcall (problema-resultado problema) (car noduloActual) accao))
+          (setf fronteira (append fronteira (list (list proximoEstado (append  (cadr noduloActual) (list accao)) (+ (funcall (problema-custo-caminho problema) proximoEstado) (funcall heuristica proximoEstado))))))
           )
         (setf fronteira (cdr fronteira))
-        (setf estadoActual (caar fronteira))
+        (setf noduloActual (car fronteira))
+        (sort fronteira #'sort-nodulo)
+        (print (cadr fronteira))
         (if (null fronteira)
             (return-from procura-A* "nao ha solucao")
           )
         )
+      (return-from procura-A* (cdadr noduloActual))
       )
-    (return-from procura-A* "caminho ate a solucao")
+    )
+  )
+
+(defun sort-nodulo (nodulo1 nodulo2)
+  (if (< (caddr nodulo1)  (caddr nodulo2))
+      nodulo2
+    nodulo1
     )
   )
 
