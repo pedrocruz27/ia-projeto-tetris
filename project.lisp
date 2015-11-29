@@ -375,18 +375,20 @@
     (let ((noduloActual (car fronteira))
           (proximoEstado nil))
       (loop while (not (funcall (problema-solucao problema) (car noduloActual))) do
-        (dolist (accao (funcall (problema-accoes problema) (car noduloActual)))
-          (setf proximoEstado (funcall (problema-resultado problema) (car noduloActual) accao))
-          (setf fronteira (append fronteira (list (list proximoEstado (append  (cadr noduloActual) (list accao)) (+ (funcall (problema-custo-caminho problema) proximoEstado) (funcall heuristica proximoEstado))))))
-          )
-        (setf fronteira (cdr fronteira))
-        (setf noduloActual (car fronteira))
-        (sort fronteira #'sort-nodulo)
-        (print (cadr fronteira))
-        (if (null fronteira)
-            (return-from procura-A* "nao ha solucao")
-          )
-        )
+            (dolist (accao (nreverse (funcall (problema-accoes problema) (car noduloActual))))
+              (print accao)
+              (setf proximoEstado (funcall (problema-resultado problema) (car noduloActual) accao))
+              (setf fronteira (append fronteira (list (list proximoEstado (append (cadr noduloActual) (list accao)) (+ (funcall (problema-custo-caminho problema) proximoEstado) (funcall heuristica proximoEstado))))))
+              )
+            (print "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+            (print noduloactual)
+            (setf fronteira (cdr fronteira))
+            (setf noduloActual (car fronteira))
+            (sort fronteira #'sort-nodulo)
+            (if (null fronteira)
+                (return-from procura-A* "nao ha solucao")
+              )
+            )
       (return-from procura-A* (cdadr noduloActual))
       )
     )
@@ -394,8 +396,8 @@
 
 (defun sort-nodulo (nodulo1 nodulo2)
   (if (< (caddr nodulo1)  (caddr nodulo2))
-      nodulo2
-    nodulo1
+      t
+    nil
     )
   )
 
