@@ -84,7 +84,7 @@
 ;;;linha <l> e devolve o valor logico verdade se todas as posicoes da linha 
 ;;;recebida estiverem preenchidas, e falso caso contrario 
 (defun tabuleiro-linha-completa-p (tabuleiro l)
-  (let ((c (1- (cadr (array-dimensions tabuleiro)))))
+  (let ((c (cadr (array-dimensions tabuleiro))))
     (dotimes (i c) 
       (cond ((not (tabuleiro-preenchido-p tabuleiro l  i)) (return-from tabuleiro-linha-completa-p nil)))
       )
@@ -369,24 +369,21 @@
     )
   )
 
-
+ 
 (defun procura-A* (problema heuristica)
   (let ((fronteira (list (list (problema-estado-inicial problema) (list nil) (+ (funcall (problema-custo-caminho problema) (problema-estado-inicial problema)) (funcall heuristica (problema-estado-inicial problema)))))))
     (let ((noduloActual (car fronteira))
           (proximoEstado nil))
       (loop while (not (funcall (problema-solucao problema) (car noduloActual))) do
             (dolist (accao (nreverse (funcall (problema-accoes problema) (car noduloActual))))
-              (print accao)
               (setf proximoEstado (funcall (problema-resultado problema) (car noduloActual) accao))
               (setf fronteira (append fronteira (list (list proximoEstado (append (cadr noduloActual) (list accao)) (+ (funcall (problema-custo-caminho problema) proximoEstado) (funcall heuristica proximoEstado))))))
               )
-            (print "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-            (print noduloactual)
             (setf fronteira (cdr fronteira))
-            (setf noduloActual (car fronteira))
             (sort fronteira #'sort-nodulo)
+            (setf noduloActual (car fronteira))
             (if (null fronteira)
-                (return-from procura-A* "nao ha solucao")
+                (return-from procura-A* nil)
               )
             )
       (return-from procura-A* (cdadr noduloActual))
@@ -401,7 +398,7 @@
     )
   )
 
-;(load "utils.fas")
+(load "utils.fas")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
