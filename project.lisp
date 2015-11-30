@@ -382,7 +382,7 @@
 ;;;PROCURA-A*
 ;;;funcao que recebe um <problema> e uma funcao <heuristica> e devolve uma lista
 ;;;de accoes que corresponde a um caminho otimizado de um estado inicial para um 
-;;;estado final. Utiliza o algoritmo A* em árvore para obter uma solucao para 
+;;;estado final. Utiliza o algoritmo A* em arvore para obter uma solucao para 
 ;;;resolver o problema. 
 (defun procura-A* (problema heuristica)
   (let ((fronteira (list (list (problema-estado-inicial problema) (list nil) (+ (funcall (problema-custo-caminho problema) (problema-estado-inicial problema)) (funcall heuristica (problema-estado-inicial problema)))))))
