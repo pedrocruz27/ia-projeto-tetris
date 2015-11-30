@@ -398,6 +398,15 @@
     )
   )
 
+(defun procura-best (array pecas)
+  (let ((problema (make-problema :estado-inicial (make-estado :pontos 0 :tabuleiro array :pecas-colocadas () :pecas-por-colocar pecas) 
+                                :solucao #'solucao 
+                                :accoes #'accoes 
+                                :resultado #'resultado 
+                                :custo-caminho #'custo-oportunidade)))
+    (procura-A* problema #'custo-oportunidade)
+    )
+  )
 (load "utils.fas")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
