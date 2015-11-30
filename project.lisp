@@ -111,7 +111,7 @@
 ;;;tabuleiro, e fazendo com que as linhas por cima da linha removida descam
 ;;;uma linha
 (defun tabuleiro-remove-linha! (tabuleiro l)
-  (if (and (<= l (car (array-dimensions tabuleiro))) (>= l 0))
+  (if (and (<= l (1- (car (array-dimensions tabuleiro)))) (>= l 0))
       (let ((c (cadr (array-dimensions tabuleiro))))
         (dotimes (i c)
           (dotimes (j (1- (- (car (array-dimensions tabuleiro)) l)))
@@ -266,6 +266,7 @@
       )
     )
   )
+
 ;;;RESULTADO
 ;;;funcao recebe um <estado> e uma <accao>, e devolve um novo estado que resulta de
 ;;;aplicar a accao recebida ao estado original
@@ -301,7 +302,7 @@
       )
     (if (tabuleiro-topo-preenchido-p (estado-tabuleiro estado2))
         (return-from resultado estado2)
-      (dotimes (i (car (array-dimensions (estado-tabuleiro estado2))))
+      (dotimes (i (1- (car (array-dimensions (estado-tabuleiro estado2)))))
         (if (tabuleiro-linha-completa-p (estado-tabuleiro estado2) i)
             (progn
               (tabuleiro-remove-linha! (estado-tabuleiro estado2) i)
@@ -404,6 +405,7 @@
       )
     )
   )
+
 ;;;SORT-NODULO
 ;;; Funcao auxiliar do sort.
 (defun sort-nodulo (nodulo1 nodulo2)
@@ -427,6 +429,7 @@
     (procura-A* problema #'custo-oportunidade)
     )
   )
+
 (load "utils.fas")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
