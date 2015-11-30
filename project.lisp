@@ -246,7 +246,7 @@
 (defun accoes (estado)
   (if (tabuleiro-topo-preenchido-p (estado-tabuleiro estado))
       nil
-    (let ((c (cadr (array-dimensions (estado-tabuleiro estado))))
+    (let ((c 10)
           (validos nil)
           (resposta ()))
       (cond ((equalp 'i (car (estado-pecas-por-colocar estado))) (setf validos (list peca-i0 peca-i1)))
@@ -302,7 +302,7 @@
       )
     (if (tabuleiro-topo-preenchido-p (estado-tabuleiro estado2))
         (return-from resultado estado2)
-      (dotimes (i (1- (car (array-dimensions (estado-tabuleiro estado2)))))
+      (dotimes (i (1- 18))
         (if (tabuleiro-linha-completa-p (estado-tabuleiro estado2) i)
             (progn
               (tabuleiro-remove-linha! (estado-tabuleiro estado2) i)
@@ -426,7 +426,7 @@
                                 :accoes #'accoes 
                                 :resultado #'resultado 
                                 :custo-caminho #'custo-oportunidade)))
-    (procura-A* problema #'custo-oportunidade)
+    (procura-A* problema #'(lambda (x) x 0) )
     )
   )
 
